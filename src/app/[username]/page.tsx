@@ -107,7 +107,9 @@ export default async function ProfilePage({ params }: Props) {
                 customThemeCard: user.customThemeCard,
                 customThemeText: user.customThemeText
             }} />
-            <div className="max-w-lg mx-auto px-4 py-12">
+            <div className={`max-w-lg mx-auto px-4 pb-12 ${
+                user.avatarLayout === 'cover' ? 'pt-24 sm:pt-12' : 'pt-12'
+            }`}>
                 {/* Profile Header (Dynamic layout chosen by user) */}
                 {(!user.avatarLayout || user.avatarLayout === 'classic') && (
                     <div className="relative mb-12 animate-scale-up-fade">
@@ -220,16 +222,19 @@ export default async function ProfilePage({ params }: Props) {
                                             src={user.avatar}
                                             alt={user.name || user.username || "Cover Background"}
                                             fill
-                                            className="object-cover absolute inset-0 z-0 select-none scale-[1.01] hover:scale-105 transition-transform duration-1000"
+                                            className="object-cover absolute inset-0 z-0 select-none scale-[1.01] hover:scale-105 transition-transform duration-1000 animate-image-reveal"
                                             sizes="(max-width: 640px) 100vw, 512px"
                                             priority
                                         />
                                     ) : (
-                                        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-accent-500/80 z-0" />
+                                        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-accent-500/80 z-0 animate-image-reveal" />
                                     )}
                                     
                                     {/* Ambient Vignette */}
                                     <div className="absolute inset-0 bg-black/10 z-10" />
+
+                                    {/* Glowing Laser Scanner Line */}
+                                    <div className="absolute left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[var(--theme-text)] to-transparent opacity-95 shadow-[0_0_15px_4px_color-mix(in srgb,var(--theme-text)_80%,transparent)] animate-laser-scan z-20 pointer-events-none" />
                                 </div>
                             </div>
                             

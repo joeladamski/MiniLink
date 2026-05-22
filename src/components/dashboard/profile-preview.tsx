@@ -65,7 +65,9 @@ export default function ProfilePreview({ data, device = 'mobile' }: ProfilePrevi
                 isInline={true}
                 onOpenChange={setIsModalOpen}
             />
-            <div className={`px-4 py-12 flex flex-col min-h-full ${!isMobile ? 'items-center max-w-sm mx-auto' : ''}`}>
+            <div className={`px-4 pb-12 flex flex-col min-h-full ${!isMobile ? 'items-center max-w-sm mx-auto' : ''} ${
+                data.avatarLayout === 'cover' ? 'pt-24' : 'pt-12'
+            }`}>
 
                 {/* Dynamic Conditional Header Layout */}
                 {(!data.avatarLayout || data.avatarLayout === 'classic') && (
@@ -161,14 +163,17 @@ export default function ProfilePreview({ data, device = 'mobile' }: ProfilePrevi
                                         src={data.avatar}
                                         alt="Cover"
                                         fill
-                                        className="object-cover absolute inset-0 z-0 select-none"
+                                        className="object-cover absolute inset-0 z-0 select-none animate-image-reveal"
                                         sizes="(max-width: 640px) 100vw, 512px"
                                         priority
                                     />
                                 ) : (
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-accent-500/80 z-0" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-accent-500/80 z-0 animate-image-reveal" />
                                 )}
                                 <div className="absolute inset-0 bg-black/10 z-10" />
+
+                                {/* Glowing Laser Scanner Line */}
+                                <div className="absolute left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[var(--theme-text)] to-transparent opacity-95 shadow-[0_0_12px_3px_color-mix(in srgb,var(--theme-text)_80%,transparent)] animate-laser-scan z-20 pointer-events-none" />
                             </div>
                         </div>
 
