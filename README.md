@@ -3,7 +3,9 @@
   # MiniLink
   
   **Your Premium Link-in-Bio Platform**
-<img width="1908" height="901" alt="image" src="https://github.com/user-attachments/assets/b630584c-4417-40cf-8c24-da2561e9c305" />
+
+  <img width="1421" height="811" alt="Screenshot 2026-05-22 at 1 12 37 PM" src="https://github.com/user-attachments/assets/428d5b68-38e1-422e-97a1-c9fc0118c7e4" />
+
 
 
 
