@@ -23,6 +23,7 @@ export async function GET() {
                 bio: true,
                 avatar: true,
                 theme: true,
+                avatarLayout: true,
             },
         });
 
@@ -52,6 +53,7 @@ export async function GET() {
                         bio: true,
                         avatar: true,
                         theme: true,
+                        avatarLayout: true,
                     },
                 });
             }
@@ -73,7 +75,7 @@ export async function PUT(request: NextRequest) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const { name, bio, avatar, theme, username, customThemeBg, customThemeCard, customThemeText } = await request.json();
+        const { name, bio, avatar, theme, username, customThemeBg, customThemeCard, customThemeText, avatarLayout } = await request.json();
 
         // If username is being changed, check uniqueness
         if (username) {
@@ -103,6 +105,7 @@ export async function PUT(request: NextRequest) {
                 ...(customThemeBg !== undefined && { customThemeBg }),
                 ...(customThemeCard !== undefined && { customThemeCard }),
                 ...(customThemeText !== undefined && { customThemeText }),
+                ...(avatarLayout !== undefined && { avatarLayout }),
             },
         });
 

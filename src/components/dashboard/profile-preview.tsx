@@ -16,6 +16,7 @@ interface ProfilePreviewProps {
         customThemeBg?: string;
         customThemeCard?: string;
         customThemeText?: string;
+        avatarLayout?: string;
         links: any[];
     };
     device?: 'mobile' | 'desktop';
@@ -66,41 +67,178 @@ export default function ProfilePreview({ data, device = 'mobile' }: ProfilePrevi
             />
             <div className={`px-4 py-12 flex flex-col min-h-full ${!isMobile ? 'items-center max-w-sm mx-auto' : ''}`}>
 
-                {/* Header */}
-                <div
-                    className="text-center mb-6 p-4 rounded-3xl backdrop-blur-lg w-full"
-                    style={{
-                        background: 'var(--theme-card)',
-                        color: 'var(--theme-text)'
-                    }}
-                >
-                    <div className="w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden ring-4 ring-white/30">
-                        {data.avatar ? (
-                            <Image
-                                src={data.avatar}
-                                alt="Avatar"
-                                width={80}
-                                height={80}
-                                className="w-full h-full object-cover"
-                            />
-                        ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
-                                <span className="text-2xl font-bold text-white">
-                                    {(data.name || data.username || 'U')[0]?.toUpperCase()}
-                                </span>
-                            </div>
+                {/* Dynamic Conditional Header Layout */}
+                {(!data.avatarLayout || data.avatarLayout === 'classic') && (
+                    <div
+                        className="text-center mb-6 p-4 rounded-3xl backdrop-blur-lg w-full border"
+                        style={{
+                            background: 'var(--theme-card)',
+                            borderColor: 'color-mix(in srgb, var(--theme-text) 8%, transparent)',
+                            color: 'var(--theme-text)'
+                        }}
+                    >
+                        <div className="w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden ring-4 ring-white/30">
+                            {data.avatar ? (
+                                <Image
+                                    src={data.avatar}
+                                    alt="Avatar"
+                                    width={80}
+                                    height={80}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
+                                    <span className="text-2xl font-bold text-white">
+                                        {(data.name || data.username || 'U')[0]?.toUpperCase()}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+
+                        <h2 className="text-lg font-bold mb-1 line-clamp-1">
+                            {data.name || `@${data.username || 'username'}`}
+                        </h2>
+                        {data.bio && (
+                            <p className="text-xs opacity-80 line-clamp-3">
+                                {data.bio}
+                            </p>
                         )}
                     </div>
+                )}
 
-                    <h2 className="text-lg font-bold mb-1 line-clamp-1">
-                        {data.name || `@${data.username || 'username'}`}
-                    </h2>
-                    {data.bio && (
-                        <p className="text-xs opacity-80 line-clamp-3">
-                            {data.bio}
-                        </p>
-                    )}
+                  {data.avatarLayout === 'cover' && (
+                    <div className="relative mb-6 group">
+                        {/* 1. Subtle Volumetric Breathing Glow */}
+                        <div className="absolute -inset-2.5 bg-[color-mix(in srgb,var(--theme-text)_6%,transparent)] rounded-[2rem] blur-xl opacity-15 group-hover:opacity-25 transition-all duration-1000 animate-pulse pointer-events-none" />
+
+                        {/* 2. Precision Moving Circumference Light */}
+                        <div 
+                            className="absolute -inset-[2px] rounded-[1.6rem] overflow-hidden pointer-events-none z-0"
+                            style={{
+                                padding: '2px',
+                                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                WebkitMaskComposite: 'xor',
+                                mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                maskComposite: 'exclude',
+                            }}
+                        >
+                            <div 
+                                className="absolute w-[200%] h-[200%] -left-1/2 -top-1/2 animate-[spin_4.5s_linear_infinite]"
+                                style={{
+                                    background: 'conic-gradient(from 0deg, transparent 35%, var(--theme-text) 50%, transparent 65%)',
+                                }}
+                            />
+                        </div>
+
+                        {/* 3. Ambient Laser Edge Glow */}
+                        <div 
+                            className="absolute -inset-[1.5px] rounded-[1.55rem] pointer-events-none transition-all duration-700 opacity-60 group-hover:opacity-85 z-0" 
+                            style={{
+                                boxShadow: '0 0 15px -2px color-mix(in srgb, var(--theme-text) 35%, transparent), inset 0 0 6px color-mix(in srgb, var(--theme-text) 15%, transparent)',
+                            }}
+                        />
+
+                        <div
+                            className="relative rounded-3xl backdrop-blur-lg w-full overflow-hidden flex flex-col border z-10"
+                            style={{
+                                background: 'var(--theme-card)',
+                                borderColor: 'color-mix(in srgb, var(--theme-text) 8%, transparent)',
+                                color: 'var(--theme-text)'
+                            }}
+                        >
+                        {/* Top Image Container */}
+                        <div className="relative w-full h-[190px] overflow-hidden">
+                            {/* Inner masking wrapper (no overflow-hidden, handles mask-image perfectly) */}
+                            <div 
+                                className="relative w-full h-full"
+                                style={{
+                                    WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.02) 12%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 1) 100%)',
+                                    maskImage: 'linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.02) 12%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 1) 100%)'
+                                }}
+                            >
+                                {data.avatar ? (
+                                    <Image
+                                        src={data.avatar}
+                                        alt="Cover"
+                                        fill
+                                        className="object-cover absolute inset-0 z-0 select-none"
+                                        sizes="(max-width: 640px) 100vw, 512px"
+                                        priority
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-accent-500/80 z-0" />
+                                )}
+                                <div className="absolute inset-0 bg-black/10 z-10" />
+                            </div>
+                        </div>
+
+                        {/* Bottom Content Area */}
+                        <div className="relative px-4 pb-5 pt-1 text-center z-20 flex flex-col items-center -mt-5">
+                            <h2 className="text-base font-bold mb-1 w-full truncate">
+                                {data.name || `@${data.username || 'username'}`}
+                            </h2>
+                             {data.bio && (
+                                <p className="text-[10px] opacity-80 max-w-xs line-clamp-3 leading-normal">
+                                    {data.bio}
+                                </p>
+                            )}
+                        </div>
+                    </div>
                 </div>
+                )}
+
+                {data.avatarLayout === 'blob' && (
+                    <div
+                        className="text-center mb-6 p-5 rounded-3xl backdrop-blur-lg w-full flex flex-col items-center border"
+                        style={{
+                            background: 'var(--theme-card)',
+                            borderColor: 'color-mix(in srgb, var(--theme-text) 8%, transparent)',
+                            color: 'var(--theme-text)'
+                        }}
+                    >
+                        <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
+                            <defs>
+                                <clipPath id="preview-blob-clip" clipPathUnits="objectBoundingBox">
+                                    <path d="M 0.5 0 C 0.75 0, 0.9 0.15, 0.9 0.35 C 0.9 0.45, 0.8 0.5, 0.8 0.5 C 0.8 0.5, 0.9 0.55, 0.9 0.65 C 0.9 0.85, 0.75 1, 0.5 1 C 0.25 1, 0.1 0.85, 0.1 0.65 C 0.1 0.55, 0.2 0.5, 0.2 0.5 C 0.2 0.5, 0.1 0.45, 0.1 0.35 C 0.1 0.15, 0.25 0, 0.5 0 Z" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                        <h2 className="text-lg font-bold mb-3.5 w-full truncate">
+                            {data.name || `@${data.username || 'username'}`}
+                        </h2>
+
+                        <div 
+                            className="w-24 h-24 mb-3.5 overflow-hidden shadow-lg shrink-0 relative transition-transform duration-500 hover:scale-105"
+                            style={{
+                                clipPath: 'url(#preview-blob-clip)',
+                                WebkitClipPath: 'url(#preview-blob-clip)',
+                            }}
+                        >
+                            {data.avatar ? (
+                                <Image
+                                    src={data.avatar}
+                                    alt="Avatar"
+                                    fill
+                                    className="w-full h-full object-cover"
+                                    sizes="96px"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
+                                    <span className="text-2xl font-black text-white">
+                                        {(data.name || data.username || 'U')[0]?.toUpperCase()}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+
+                        {data.bio && (
+                            <p className="text-xs opacity-80 max-w-xs line-clamp-3 leading-relaxed">
+                                {data.bio}
+                            </p>
+                        )}
+                    </div>
+                )}
 
                 {/* Links */}
                 <div className="space-y-3 flex-1 w-full">

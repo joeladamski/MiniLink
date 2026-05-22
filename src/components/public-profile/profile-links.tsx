@@ -70,6 +70,39 @@ const iconMap: Record<string, any> = {
     link: Link2,
 };
 
+const getIconColor = (iconName: string | null | undefined): string => {
+    if (!iconName) return 'var(--theme-text)';
+    
+    const colors: Record<string, string> = {
+        website: '#0ea5e9', // Sky blue
+        instagram: '#e1306c', // Instagram gradient red/pink
+        youtube: '#ff0000', // YouTube red
+        twitter: '#1d9bf0', // Twitter blue
+        github: '#64748b', // Slate gray
+        linkedin: '#0077b5', // LinkedIn blue
+        facebook: '#1877f2', // Facebook blue
+        medium: '#00ab6c', // Medium green
+        whatsapp: '#25d366', // WhatsApp green
+        telegram: '#229ed9', // Telegram blue
+        spotify: '#1db954', // Spotify green
+        twitch: '#9146ff', // Twitch purple
+        kofi: '#ff5e5b', // Ko-fi red
+        email: '#ea4335', // Gmail red
+        shop: '#ec4899', // Shop pink
+        leetcode: '#ffa116', // Leetcode orange
+        codechef: '#b45309', // Codechef brown
+        codeforces: '#3b82f6', // Codeforces blue
+        hackerrank: '#2ec866', // Hackerrank green
+        hackerearth: '#3275b3', // Hackerearth blue
+        gfg: '#2f8d46', // GFG green
+        laptop: '#06b6d4', // Cyan
+        socials: '#a855f7', // Purple
+        link: '#64748b', // Slate
+    };
+    
+    return colors[iconName.toLowerCase()] || 'var(--theme-text)';
+};
+
 interface Props {
     links: any[];
 }
@@ -101,12 +134,12 @@ export default function ProfileLinks({ links }: Props) {
                     return (
                         <div
                             key={link.id}
-                            className="opacity-0 animate-fade-in-up relative z-10"
-                            style={{ animationDelay: `${index * 100}ms` }}
+                            className="opacity-0 animate-spring-up relative z-10"
+                            style={{ animationDelay: `${600 + index * 100}ms` }}
                         >
                             <button
                                 onClick={() => toggleFolder(link.id)}
-                                className="w-full relative group overflow-hidden rounded-[1.25rem] bg-black/20 dark:bg-white/[0.03] backdrop-blur-xl border border-white/10 p-4 transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
+                                className="w-full relative group overflow-hidden rounded-[1.25rem] bg-black/20 dark:bg-white/[0.03] backdrop-blur-xl border border-white/10 p-4 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)]"
                                 style={{
                                     borderColor: 'var(--theme-link-border)',
                                     background: 'var(--theme-link-bg)'
@@ -182,6 +215,7 @@ export default function ProfileLinks({ links }: Props) {
                                                             <ChildIcon className="w-5 h-5" />
                                                         )
                                                     }
+                                                    brandColor={getIconColor(child.icon)}
                                                 />
                                             </div>
                                         );
@@ -195,8 +229,8 @@ export default function ProfileLinks({ links }: Props) {
                 return (
                     <div
                         key={link.id}
-                        className="opacity-0 animate-fade-in-up relative hover:z-50"
-                        style={{ animationDelay: `${index * 100}ms` }}
+                        className="opacity-0 animate-spring-up relative hover:z-50"
+                        style={{ animationDelay: `${600 + index * 100}ms` }}
                     >
                         <LinkButton
                             link={{
@@ -217,6 +251,7 @@ export default function ProfileLinks({ links }: Props) {
                                     <IconComponent className="w-5 h-5" />
                                 )
                             }
+                            brandColor={getIconColor(link.icon)}
                         />
                     </div>
                 );

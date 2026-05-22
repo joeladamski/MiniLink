@@ -25,6 +25,24 @@ const THEMES = [
     { id: 'custom', name: 'Custom', preview: 'bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-dashed border-gray-400 dark:border-gray-600' },
 ];
 
+const LAYOUTS = [
+    {
+        id: 'classic',
+        name: 'Classic Circle',
+        description: 'Centered circular avatar with interactive outer ring glows'
+    },
+    {
+        id: 'cover',
+        name: 'Cover Banner',
+        description: 'Avatar fills the background with a smooth vertical bottom gradient fade'
+    },
+    {
+        id: 'blob',
+        name: 'Organic Blob',
+        description: 'Name on top with avatar clipped inside an organic clover leaf shape'
+    }
+];
+
 export default function AppearancePage() {
     const { user } = useUser();
     const { addToast } = useToast();
@@ -40,6 +58,7 @@ export default function AppearancePage() {
         customThemeBg: '#05010d',
         customThemeCard: 'rgba(20, 15, 35, 0.7)',
         customThemeText: '#ffffff',
+        avatarLayout: 'classic',
         links: [] as any[],
     });
 
@@ -68,6 +87,7 @@ export default function AppearancePage() {
                 customThemeBg: profileData.customThemeBg || '#05010d',
                 customThemeCard: profileData.customThemeCard || 'rgba(20, 15, 35, 0.7)',
                 customThemeText: profileData.customThemeText || '#ffffff',
+                avatarLayout: profileData.avatarLayout || 'classic',
                 links: Array.isArray(linksData) ? linksData.filter((l: any) => l.isActive) : [],
             });
         } catch (error) {
@@ -93,6 +113,7 @@ export default function AppearancePage() {
                     customThemeBg: profile.customThemeBg,
                     customThemeCard: profile.customThemeCard,
                     customThemeText: profile.customThemeText,
+                    avatarLayout: profile.avatarLayout,
                 }),
             });
 
@@ -240,6 +261,78 @@ export default function AppearancePage() {
                                     onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
                                     maxLength={200}
                                 />
+                            </div>
+
+                            {/* Layout Selection */}
+                            <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
+                                <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">Avatar & Header Layout</h3>
+                                <p className="text-xs text-gray-500 mb-6">Choose how your avatar, name, and bio are arranged on your page.</p>
+                                
+                                <div className="grid grid-cols-2 gap-4">
+                                    {LAYOUTS.map((layout) => {
+                                        const isSelected = profile.avatarLayout === layout.id;
+                                        return (
+                                            <button
+                                                key={layout.id}
+                                                type="button"
+                                                onClick={() => setProfile({ ...profile, avatarLayout: layout.id })}
+                                                className={`
+                                                    relative text-left p-4 rounded-2xl border-2 transition-all flex flex-col justify-between h-44 overflow-hidden group
+                                                    ${isSelected
+                                                        ? 'border-primary-500 bg-primary-50/30 dark:bg-primary-900/5 shadow-sm'
+                                                        : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-900/30'
+                                                    }
+                                                `}
+                                            >
+                                                {/* Mini schematic preview of the layout */}
+                                                <div className="w-full h-16 rounded-lg bg-gray-100 dark:bg-gray-950 border border-gray-200/50 dark:border-gray-800/50 flex flex-col items-center justify-center p-2 relative overflow-hidden">
+                                                    {layout.id === 'classic' && (
+                                                        <div className="flex flex-col items-center gap-1.5 w-full">
+                                                            <div className="w-6 h-6 rounded-full border-2 border-primary-500 bg-primary-500/20 shrink-0" />
+                                                            <div className="w-16 h-1.5 bg-gray-300 dark:bg-gray-700 rounded" />
+                                                            <div className="w-10 h-1 bg-gray-200 dark:bg-gray-800 rounded" />
+                                                        </div>
+                                                    )}
+                                                    {layout.id === 'cover' && (
+                                                        <div className="w-full h-full relative flex flex-col justify-end p-1.5 bg-gradient-to-t from-gray-900 to-gray-800/40">
+                                                            <div className="absolute top-1 left-2 w-3 h-3 rounded-full border border-white/20 bg-white/10" />
+                                                            <div className="w-12 h-1 bg-white/80 rounded mb-0.5" />
+                                                            <div className="w-8 h-0.5 bg-white/40 rounded" />
+                                                        </div>
+                                                    )}
+                                                    {layout.id === 'blob' && (
+                                                        <div className="flex flex-col items-center justify-between h-full py-0.5">
+                                                            <div className="w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded" />
+                                                            <div className="w-8 h-8 rounded-full border-2 border-primary-500 bg-primary-500/20 shrink-0 relative flex items-center justify-center">
+                                                                {/* Custom SVG inside the miniature layout representer */}
+                                                                <svg viewBox="0 0 100 100" className="w-full h-full fill-primary-500/30 stroke-primary-500 stroke-[4px]">
+                                                                    <path d="M 50 0 C 75 0, 90 15, 90 35 C 90 45, 80 50, 80 50 C 80 50, 90 55, 90 65 C 90 85, 75 100, 50 100 C 25 100, 10 85, 10 65 C 10 55, 20 50, 20 50 C 20 50, 10 45, 10 35 C 10 15, 25 0, 50 0 Z" />
+                                                                </svg>
+                                                            </div>
+                                                            <div className="w-8 h-0.5 bg-gray-200 dark:bg-gray-800 rounded" />
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                <div className="mt-3">
+                                                    <p className={`text-xs font-bold leading-tight ${isSelected ? 'text-primary-700 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'}`}>
+                                                        {layout.name}
+                                                    </p>
+                                                    <p className="text-[9px] leading-normal text-gray-500 mt-1 line-clamp-2">
+                                                        {layout.description}
+                                                    </p>
+                                                </div>
+
+                                                {/* Check indicator */}
+                                                {isSelected && (
+                                                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary-500 flex items-center justify-center text-white shadow-sm">
+                                                        <Check className="w-3 h-3" />
+                                                    </div>
+                                                )}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>

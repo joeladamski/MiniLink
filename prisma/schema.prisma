@@ -19,7 +19,8 @@ model User {
   customThemeBg   String?
   customThemeCard String?
   customThemeText String?
-  createdAt     DateTime  @default(now())
+  avatarLayout    String    @default("classic")
+  createdAt       DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   links     Link[]
