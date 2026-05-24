@@ -77,6 +77,25 @@ export async function PUT(request: NextRequest) {
 
         const { name, bio, avatar, theme, username, customThemeBg, customThemeCard, customThemeText, avatarLayout } = await request.json();
 
+        // Admin-exclusivity check for Cover Banner layout
+        if (avatarLayout === 'cover') {
+            const dbUser = await prisma.user.findUnique({
+                where: { id: userId },
+                select: { username: true },
+            });
+            const isAdmin =
+                dbUser?.username?.toLowerCase() === 'tusharbhardwaj' ||
+                (process.env.NEXT_PUBLIC_ADMIN_USERNAME && dbUser?.username?.toLowerCase() === process.env.NEXT_PUBLIC_ADMIN_USERNAME.toLowerCase()) ||
+                (process.env.NEXT_PUBLIC_ADMIN_USER_ID && userId === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
+
+            if (!isAdmin) {
+                return NextResponse.json(
+                    { error: 'The Cover Banner layout is exclusive to the platform founder.' },
+                    { status: 403 }
+                );
+            }
+        }
+
         // If username is being changed, check uniqueness
         if (username) {
             const existing = await prisma.user.findFirst({

@@ -11,7 +11,7 @@ import {
     Copy,
     Check
 } from 'lucide-react';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import CopyButton from '@/components/dashboard/copy-button';
 import { Metadata } from 'next';
 
@@ -156,8 +156,12 @@ export default async function DashboardPage() {
         }),
     ]);
 
+    const headersList = headers();
+    const host = headersList.get('host') || 'minianonlink.vercel.app';
+    const protocol = headersList.get('x-forwarded-proto') || 'https';
+
     const profileUrl = user?.username
-        ? `${process.env.NEXT_PUBLIC_APP_URL || 'https://minilink.app'}/${user.username}`
+        ? `${protocol}://${host}/${user.username}`
         : null;
 
     const stats = [

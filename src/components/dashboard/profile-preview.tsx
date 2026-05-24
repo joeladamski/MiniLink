@@ -25,15 +25,13 @@ interface ProfilePreviewProps {
 export default function ProfilePreview({ data, device = 'mobile' }: ProfilePreviewProps) {
     const themeClass = `theme-${data.theme || 'default'}`;
     const isMobile = device === 'mobile';
-    const [domain, setDomain] = useState('minianonlink.vercel.app');
+    const [domain, setDomain] = useState('link.minianon.in');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            // Only use window.location.host if it's NOT the local dev environment,
-            // otherwise stick to the official branded domain for the clean "wow" factor.
             const host = window.location.host;
-            if (host.includes('minilink') || host.includes('vercel.app')) {
+            if (!host.includes('localhost') && !host.includes('127.0.0.1')) {
                 setDomain(host);
             }
         }

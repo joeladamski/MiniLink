@@ -17,6 +17,8 @@ export default function SettingsPage() {
     const [username, setUsername] = useState('');
     const [originalUsername, setOriginalUsername] = useState('');
     const [error, setError] = useState('');
+    const [profileUrl, setProfileUrl] = useState('');
+    const [displayDomain, setDisplayDomain] = useState('link.minianon.in');
 
     // Live checking state
     const [isChecking, setIsChecking] = useState(false);
@@ -65,6 +67,19 @@ export default function SettingsPage() {
 
         return () => clearTimeout(timeoutId);
     }, [username, originalUsername]);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const origin = window.location.origin;
+            const host = window.location.host;
+            setDisplayDomain(host);
+            if (originalUsername) {
+                setProfileUrl(`${origin}/${originalUsername}`);
+            } else {
+                setProfileUrl('');
+            }
+        }
+    }, [originalUsername]);
 
     const fetchProfile = async () => {
         try {
@@ -148,14 +163,6 @@ export default function SettingsPage() {
             setIsSaving(false);
         }
     };
-
-    const profileUrl = originalUsername
-        ? `${process.env.NEXT_PUBLIC_APP_URL || window.location.origin}/${originalUsername}`
-        : '';
-
-    const displayDomain = process.env.NEXT_PUBLIC_APP_URL
-        ? process.env.NEXT_PUBLIC_APP_URL.replace(/^https?:\/\//, '')
-        : 'minianonlink.vercel.app';
 
     const handleCopy = async () => {
         await navigator.clipboard.writeText(profileUrl);

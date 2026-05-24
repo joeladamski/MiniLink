@@ -167,7 +167,7 @@ function LaptopDemo({ isDark }: { isDark: boolean }) {
                         </div>
                         <div className="flex-1 mx-2">
                             <div className="bg-white dark:bg-gray-700 rounded-md h-5 flex items-center px-2">
-                                <span className="text-[10px] text-gray-400">minianonlink.vercel.app/dashboard</span>
+                                <span className="text-[10px] text-gray-400">link.minianon.in/dashboard</span>
                             </div>
                         </div>
                     </div>
@@ -185,7 +185,7 @@ function LaptopDemo({ isDark }: { isDark: boolean }) {
                         {step === 0 && (
                             <div className="flex flex-col items-center animate-fadeIn">
                                 <div className="flex items-center gap-1 bg-white dark:bg-gray-700 rounded-xl px-4 py-3 shadow-lg border-2 border-violet-500 w-80">
-                                    <span className="text-gray-400 text-xs">minianonlink.vercel.app/</span>
+                                    <span className="text-gray-400 text-xs">link.minianon.in/</span>
                                     <span className="text-gray-900 dark:text-white font-medium text-sm">{typedText}</span>
                                     <span className={`w-0.5 h-4 bg-violet-500 ${showCursor ? 'opacity-100' : 'opacity-0'}`}></span>
                                 </div>
@@ -206,7 +206,7 @@ function LaptopDemo({ isDark }: { isDark: boolean }) {
                                         </div>
                                         <input className="flex-1 bg-gray-50 dark:bg-gray-600 rounded-lg px-2 py-1 text-sm text-gray-700 dark:text-gray-200" defaultValue="Portfolio" readOnly />
                                     </div>
-                                    <input className="w-full bg-gray-50 dark:bg-gray-600 rounded-lg px-2 py-1 text-xs text-gray-500" defaultValue="https://tushar-bhardwaj.vercel.app" readOnly />
+                                    <input className="w-full bg-gray-50 dark:bg-gray-600 rounded-lg px-2 py-1 text-xs text-gray-500" defaultValue="https://tushar.link.minianon.in" readOnly />
                                 </div>
                                 <button className="px-4 py-2 bg-gradient-to-r from-violet-600 to-pink-600 text-white text-sm font-medium rounded-lg flex items-center gap-2 shadow-lg hover:shadow-xl transition-all">
                                     <Plus className="w-4 h-4" />
@@ -245,7 +245,7 @@ function LaptopDemo({ isDark }: { isDark: boolean }) {
                                     Your MiniLink is ready to share
                                 </p>
                                 <div className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-pink-600 text-white rounded-lg px-4 py-2 shadow-lg">
-                                    <span className="text-sm font-medium">minianonlink.vercel.app/tushar</span>
+                                    <span className="text-sm font-medium">link.minianon.in/tushar</span>
                                     <ExternalLink className="w-4 h-4" />
                                 </div>
                                 <div className="grid grid-cols-4 gap-2 mt-2">
@@ -546,7 +546,7 @@ function AnimatedFastFeature() {
                     <div className="w-2 h-2 rounded-full bg-red-400"></div>
                     <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                     <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                    <div className="ml-2 flex-1 h-3 bg-white dark:bg-gray-700 rounded text-[6px] text-gray-400 flex items-center px-1">minianonlink.vercel.app/me</div>
+                    <div className="ml-2 flex-1 h-3 bg-white dark:bg-gray-700 rounded text-[6px] text-gray-400 flex items-center px-1">link.minianon.in/me</div>
                 </div>
                 <div className="flex-1 p-4 flex flex-col items-center pt-6 bg-gray-50 dark:bg-[#0a0a0f] space-y-3">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg"></div>
@@ -578,7 +578,7 @@ function AnimatedFastFeature() {
                         <p className="mb-1">Check my new profile! 🔥</p>
                         <div className={`bg-blue-600/50 rounded p-1.5 flex items-center gap-1.5 cursor-pointer hover:bg-blue-600 transition-colors ${state === 2 ? 'ring-2 ring-white/50' : ''}`}>
                             <Link2 size={10} />
-                            <span className="font-mono opacity-90">minianonlink.vercel.app/me</span>
+                            <span className="font-mono opacity-90">link.minianon.in/me</span>
                             <MousePointer2 className={`w-4 h-4 text-white absolute bottom-[-10px] right-[-10px] transition-opacity duration-300 ${state === 2 ? 'opacity-100' : 'opacity-0'}`} />
                         </div>
                     </div>

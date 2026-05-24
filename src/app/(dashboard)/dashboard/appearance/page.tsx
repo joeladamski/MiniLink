@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
-import { Loader2, Check, Upload, Laptop, Smartphone, User, Palette } from 'lucide-react';
+import { Loader2, Check, Upload, Laptop, Smartphone, User, Palette, Lock } from 'lucide-react';
 import Image from 'next/image';
 import { CldUploadButton } from 'next-cloudinary';
 import { useToast } from '@/components/ui/toaster';
@@ -46,6 +46,10 @@ const LAYOUTS = [
 export default function AppearancePage() {
     const { user } = useUser();
     const { addToast } = useToast();
+    const isAdmin = 
+        user?.username?.toLowerCase() === 'tusharbhardwaj' ||
+        (process.env.NEXT_PUBLIC_ADMIN_USERNAME && user?.username?.toLowerCase() === process.env.NEXT_PUBLIC_ADMIN_USERNAME.toLowerCase()) ||
+        (process.env.NEXT_PUBLIC_ADMIN_USER_ID && user?.id === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const [previewDevice, setPreviewDevice] = useState<'mobile' | 'desktop'>('mobile');
@@ -271,17 +275,29 @@ export default function AppearancePage() {
                                 <div className="grid grid-cols-2 gap-4">
                                     {LAYOUTS.map((layout) => {
                                         const isSelected = profile.avatarLayout === layout.id;
+                                        const isLocked = layout.id === 'cover' && !isAdmin;
                                         return (
                                             <button
                                                 key={layout.id}
                                                 type="button"
-                                                onClick={() => setProfile({ ...profile, avatarLayout: layout.id })}
+                                                onClick={() => {
+                                                    if (isLocked) {
+                                                        addToast({
+                                                            title: 'Layout Exclusive 👑',
+                                                            description: 'The Cover Banner layout is exclusive to the platform founder.',
+                                                            variant: 'error',
+                                                        });
+                                                        return;
+                                                    }
+                                                    setProfile({ ...profile, avatarLayout: layout.id });
+                                                }}
                                                 className={`
                                                     relative text-left p-4 rounded-2xl border-2 transition-all flex flex-col justify-between h-44 overflow-hidden group
                                                     ${isSelected
                                                         ? 'border-primary-500 bg-primary-50/30 dark:bg-primary-900/5 shadow-sm'
                                                         : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-900/30'
                                                     }
+                                                    ${isLocked ? 'opacity-70 cursor-not-allowed' : ''}
                                                 `}
                                             >
                                                 {/* Mini schematic preview of the layout */}
@@ -327,6 +343,12 @@ export default function AppearancePage() {
                                                 {isSelected && (
                                                     <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary-500 flex items-center justify-center text-white shadow-sm">
                                                         <Check className="w-3 h-3" />
+                                                    </div>
+                                                )}
+                                                {isLocked && (
+                                                    <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 flex items-center gap-1 text-[9px] font-bold text-amber-600 dark:text-amber-400 shadow-sm animate-scale-up-fade">
+                                                        <Lock className="w-2.5 h-2.5" />
+                                                        <span>Founder Exclusive</span>
                                                     </div>
                                                 )}
                                             </button>

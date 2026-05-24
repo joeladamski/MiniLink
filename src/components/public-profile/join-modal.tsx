@@ -24,6 +24,16 @@ export default function JoinModal({ isOpen, onClose, isInline = false }: JoinMod
     const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
     const [checking, setChecking] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [domain, setDomain] = useState('link.minianon.in');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const host = window.location.host;
+            if (!host.includes('localhost') && !host.includes('127.0.0.1')) {
+                setDomain(host);
+            }
+        }
+    }, []);
 
     useEffect(() => {
         setMounted(true);
@@ -125,7 +135,7 @@ export default function JoinModal({ isOpen, onClose, isInline = false }: JoinMod
                                 : 'border-white/10 group-focus-within:border-violet-500'
                             }`}>
                             <div className="flex items-center pl-5 pr-1 text-white/40 font-bold whitespace-nowrap bg-white/[0.02]">
-                                minianonlink.vercel.app/
+                                {domain}/
                             </div>
                             <div className="relative flex-1">
                                 <input
