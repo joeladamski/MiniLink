@@ -1015,7 +1015,7 @@ export default function HomePage() {
                                             <div className="w-full mt-5 space-y-2.5">
                                                 {/* Portfolio */}
                                                 <a
-                                                    href="https://tushar-bhardwaj.vercel.app/"
+                                                    href="https://tushar.minianon.in"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="w-full py-3 px-4 bg-gray-50 dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-800 dark:text-gray-200 flex items-center gap-3 border border-gray-100 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:border-blue-300 dark:hover:border-blue-600 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 cursor-pointer group"
