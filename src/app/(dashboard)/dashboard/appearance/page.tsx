@@ -46,10 +46,7 @@ const LAYOUTS = [
 export default function AppearancePage() {
     const { user } = useUser();
     const { addToast } = useToast();
-    const isAdmin = 
-        user?.username?.toLowerCase() === 'tusharbhardwaj' ||
-        (process.env.NEXT_PUBLIC_ADMIN_USERNAME && user?.username?.toLowerCase() === process.env.NEXT_PUBLIC_ADMIN_USERNAME.toLowerCase()) ||
-        (process.env.NEXT_PUBLIC_ADMIN_USER_ID && user?.id === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
+    const isAdmin = !!(process.env.NEXT_PUBLIC_ADMIN_USER_ID && user?.id === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const [previewDevice, setPreviewDevice] = useState<'mobile' | 'desktop'>('mobile');

@@ -80,10 +80,7 @@ export default async function ProfilePage({ params }: Props) {
         },
     });
 
-    const isAdmin = 
-        (process.env.NEXT_PUBLIC_ADMIN_USER_ID && user.id === process.env.NEXT_PUBLIC_ADMIN_USER_ID) || 
-        (process.env.NEXT_PUBLIC_ADMIN_USERNAME && user.username?.toLowerCase() === process.env.NEXT_PUBLIC_ADMIN_USERNAME.toLowerCase()) ||
-        user.username?.toLowerCase() === 'tusharbhardwaj';
+    const isAdmin = !!(process.env.NEXT_PUBLIC_ADMIN_USER_ID && user.id === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
     const themeClass = `theme-${user.theme || 'default'}`;
 
     const customStyles = user.theme === 'custom' ? {
