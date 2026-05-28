@@ -79,7 +79,11 @@ export async function PUT(request: NextRequest) {
 
         // Admin-exclusivity check for Cover Banner layout
         if (avatarLayout === 'cover') {
-            const isAdmin = !!(process.env.NEXT_PUBLIC_ADMIN_USER_ID && userId === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
+            const dbUser = await prisma.user.findUnique({
+                where: { id: userId },
+                select: { username: true },
+            });
+            const isAdmin = dbUser?.username?.toLowerCase() === 'tusharbhardwaj';
 
             if (!isAdmin) {
                 return NextResponse.json(

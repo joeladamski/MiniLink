@@ -80,7 +80,7 @@ export default async function ProfilePage({ params }: Props) {
         },
     });
 
-    const isAdmin = !!(process.env.NEXT_PUBLIC_ADMIN_USER_ID && user.id === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
+    const isAdmin = user.username?.toLowerCase() === 'tusharbhardwaj';
     const themeClass = `theme-${user.theme || 'default'}`;
 
     const customStyles = user.theme === 'custom' ? {

@@ -46,7 +46,6 @@ const LAYOUTS = [
 export default function AppearancePage() {
     const { user } = useUser();
     const { addToast } = useToast();
-    const isAdmin = !!(process.env.NEXT_PUBLIC_ADMIN_USER_ID && user?.id === process.env.NEXT_PUBLIC_ADMIN_USER_ID);
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const [previewDevice, setPreviewDevice] = useState<'mobile' | 'desktop'>('mobile');
@@ -62,6 +61,7 @@ export default function AppearancePage() {
         avatarLayout: 'classic',
         links: [] as any[],
     });
+    const isAdmin = profile.username?.toLowerCase() === 'tusharbhardwaj';
 
     useEffect(() => {
         if (user) {
