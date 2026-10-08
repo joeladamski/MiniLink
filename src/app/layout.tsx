@@ -8,16 +8,16 @@ import Providers from '@/components/providers';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-    title: 'MiniLink - Build Your Free Link in Bio',
+    title: `${process.env.NEXT_PUBLIC_PLATFORM_NAME || 'MiniLink'} - Build Your Link in Bio`,
     description: 'MiniLink is the ultimate link-in-bio tool for creators, influencers, and businesses. Share all your content, social profiles, and products with a single, highly customizable URL.',
     keywords: ['linktree alternative', 'link in bio', 'social media links', 'creator tools', 'portfolio link', 'custom bio link'],
     authors: [{ name: 'Tushar Bhardwaj', url: 'https://tushar-bhardwaj.vercel.app' }],
-    metadataBase: new URL('https://minianonlink.vercel.app'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
     openGraph: {
         title: 'MiniLink - Build Your Free Link in Bio',
         description: 'Share all your links, content, and products with one powerful, customizable bio link. Fast, secure, and 100% free.',
-        url: 'https://minianonlink.vercel.app',
-        siteName: 'MiniLink',
+        url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+        siteName: process.env.NEXT_PUBLIC_PLATFORM_NAME || 'MiniLink',
         images: [
             {
                 url: '/og-image.png', // Assuming we might add an og-image later, or it uses a default
