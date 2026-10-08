@@ -11,5 +11,5 @@ export function mergeSections(rows: Partial<SectionContent>[]): SectionContent[]
   return DEFAULT_SECTIONS.map(def => ({ ...def, ...(rows.find(r => r.key === def.key) || {}) }));
 }
 export function safeDestination(url: string): boolean {
-  return url.startsWith('/') && !url.startsWith('//') && !url.includes('\\') && !/[\r\n]/.test(url);
+  return (url.startsWith('/') && !url.startsWith('//') || /^#[a-zA-Z][a-zA-Z0-9_-]*$/.test(url)) && !url.includes('\\') && !/[\r\n]/.test(url);
 }
