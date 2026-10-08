@@ -907,195 +907,71 @@ export default function HomePage() {
                 </div>
             </nav>
 
-            {/* Live Demo Section */}
-            {showHomepageLivePreview && section("live_preview").enabled && <section className="pt-28 pb-12 sm:pt-32 sm:pb-20 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl mb-4">
-                            {section("live_preview").title}
-                        </h2>
-                        <p className="text-lg text-gray-600 dark:text-gray-400">
-                            {section("live_preview").subtitle}
-                        </p>
+            {/* Unified featured-creator hero: real preview left, editable promotional copy right. */}
+            {(section("hero").enabled || (showHomepageLivePreview && section("live_preview").enabled)) && (
+                <section className="relative overflow-hidden px-4 pb-12 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-16">
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+                        <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
+                        <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-fuchsia-600/10 blur-3xl" />
                     </div>
-
-                    <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
-                        {/* Laptop Mockup (Creation Flow) */}
-                        <div className="w-full max-w-[600px] flex justify-center">
-                            {/* Scaled wrapper to fit mobile screens */}
-                            <div className="transform scale-[0.5] xs:scale-[0.6] sm:scale-[0.8] md:scale-90 lg:scale-100 origin-center -my-24 sm:-my-12 lg:my-0 transition-transform duration-500">
-                                <LaptopDemo isDark={isDark} />
-                            </div>
-                        </div>
-
-                        {featuredUsername ? (
-                            <div className="relative mx-auto h-[570px] w-[280px] overflow-hidden rounded-[50px] border-4 border-gray-800 bg-gray-900 p-3 shadow-2xl">
-                                <div className="absolute top-4 left-1/2 z-20 h-7 w-28 -translate-x-1/2 rounded-full bg-black pointer-events-none" />
-                                <div className="h-full overflow-hidden rounded-[38px] bg-gray-950">
-                                    <iframe
-                                        key={featuredUsername}
-                                        title={`Live creator preview: @${featuredUsername}`}
-                                        src={`/${encodeURIComponent(featuredUsername)}`}
-                                        loading="lazy"
-                                        referrerPolicy="same-origin"
-                                        className="h-full w-full border-0"
-                                    />
-                                </div>
-                            </div>
-                        ) : (
-                        <div className="relative mt-8 lg:mt-0 transform scale-[0.85] sm:scale-100 transition-transform duration-500">
-                            {/* Live Preview Label */}
-                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-violet-600 to-pink-600 rounded-full shadow-lg z-20">
-                                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                                <span className="text-xs font-semibold text-white whitespace-nowrap">Live Preview</span>
-                            </div>
-                            {/* iPhone Frame */}
-                            <div className="relative w-[280px] h-[570px] bg-gray-900 rounded-[50px] p-3 shadow-2xl border-4 border-gray-800 mx-auto">
-                                {/* Dynamic Island */}
-                                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-10"></div>
-                                {/* Screen */}
-                                <div className="w-full h-full rounded-[38px] bg-gradient-to-br from-violet-600 via-purple-600 to-pink-600 overflow-hidden">
-                                    {/* Profile Content */}
-                                    <div className="w-full h-full bg-white dark:bg-gray-900 mt-1 rounded-t-[38px] p-6 pt-12">
-                                        <div className="flex flex-col items-center text-center">
-                                            {/* Avatar with actual photo */}
-                                            <div className="w-20 h-20 rounded-full mb-3 ring-4 ring-white dark:ring-gray-800 shadow-xl overflow-hidden relative">
-                                                <Image src="/me.jpeg" alt="Tushar Bhardwaj" fill className="object-cover" sizes="80px" />
-                                            </div>
-                                            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Tushar Bhardwaj</h3>
-                                            <p className="text-gray-500 dark:text-gray-400 text-[10px] mt-0.5 px-2 leading-relaxed">Ex - SWE Intern Microsoft | Top 0.1% Club Topmate | Sharing Tech & Career Insights with 23K+ Linkedin</p>
-
-                                            {/* Interactive Links with animations */}
-                                            <div className="w-full mt-5 space-y-2.5">
-                                                {/* Portfolio */}
-                                                <a
-                                                    href="https://tushar.minianon.in"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="w-full py-3 px-4 bg-gray-50 dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-800 dark:text-gray-200 flex items-center gap-3 border border-gray-100 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:border-blue-300 dark:hover:border-blue-600 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 cursor-pointer group"
-                                                    style={{ animationDelay: '0.1s' }}
-                                                >
-                                                    <svg className="w-5 h-5 text-blue-500 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
-                                                    <span className="group-hover:translate-x-1 transition-transform">Portfolio</span>
-                                                    <ExternalLink className="w-3 h-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-blue-500" />
-                                                </a>
-                                                {/* LinkedIn */}
-                                                <a
-                                                    href="https://www.linkedin.com/in/bhardwajtushar2004/"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="w-full py-3 px-4 bg-gray-50 dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-800 dark:text-gray-200 flex items-center gap-3 border border-gray-100 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:border-blue-400 dark:hover:border-blue-500 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 cursor-pointer group"
-                                                    style={{ animationDelay: '0.2s' }}
-                                                >
-                                                    <svg className="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
-                                                    <span className="group-hover:translate-x-1 transition-transform">LinkedIn</span>
-                                                    <ExternalLink className="w-3 h-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-blue-600" />
-                                                </a>
-                                                {/* Twitter/X */}
-                                                <a
-                                                    href="https://x.com/Tusharab2004"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="w-full py-3 px-4 bg-gray-50 dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-800 dark:text-gray-200 flex items-center gap-3 border border-gray-100 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 cursor-pointer group"
-                                                    style={{ animationDelay: '0.3s' }}
-                                                >
-                                                    <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-                                                    <span className="group-hover:translate-x-1 transition-transform">Twitter / X</span>
-                                                    <ExternalLink className="w-3 h-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-                                                </a>
-                                                {/* GitHub */}
-                                                <a
-                                                    href="https://github.com/TuShArBhArDwA"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="w-full py-3 px-4 bg-gray-50 dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-800 dark:text-gray-200 flex items-center gap-3 border border-gray-100 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-purple-400 dark:hover:border-purple-500 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 cursor-pointer group"
-                                                    style={{ animationDelay: '0.4s' }}
-                                                >
-                                                    <svg className="w-5 h-5 group-hover:rotate-[360deg] transition-transform duration-500" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
-                                                    <span className="group-hover:translate-x-1 transition-transform">GitHub</span>
-                                                    <ExternalLink className="w-3 h-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-purple-500" />
-                                                </a>
-                                            </div>
+                    <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                        {showHomepageLivePreview && section("live_preview").enabled && (
+                            <div className="relative flex min-w-0 items-center justify-center py-4 sm:py-8" aria-label="Featured creator profile">
+                                <div aria-hidden="true" className="pointer-events-none absolute h-[380px] w-[380px] max-w-full rounded-full border border-fuchsia-500/30 shadow-[0_0_100px_rgba(139,92,246,0.3)]" />
+                                <div aria-hidden="true" className="pointer-events-none absolute left-[5%] top-[18%] hidden h-14 w-14 -rotate-12 items-center justify-center rounded-2xl border border-pink-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(236,72,153,0.3)] sm:flex">✦</div>
+                                <div aria-hidden="true" className="pointer-events-none absolute right-[7%] bottom-[18%] hidden h-14 w-14 rotate-12 items-center justify-center rounded-2xl border border-violet-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(139,92,246,0.3)] sm:flex">↗</div>
+                                <div className="relative h-[630px] w-[340px] max-w-full overflow-hidden rounded-[53px] border-[5px] border-slate-700 bg-slate-950 p-[10px] shadow-[0_0_45px_rgba(99,102,241,0.45)] ring-1 ring-violet-500/50">
+                                    <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[17px] z-20 h-7 w-28 -translate-x-1/2 rounded-full bg-black" />
+                                    {featuredUsername ? (
+                                        <div className="relative h-full overflow-hidden rounded-[39px] bg-slate-900">
+                                            <iframe
+                                                key={featuredUsername}
+                                                title={`Featured creator: @${featuredUsername}`}
+                                                src={`/${encodeURIComponent(featuredUsername)}`}
+                                                loading="lazy"
+                                                referrerPolicy="same-origin"
+                                                className="absolute left-0 top-0 h-[760px] w-[390px] origin-top-left scale-[0.79] border-0 bg-slate-900"
+                                            />
                                         </div>
-                                    </div>
+                                    ) : (
+                                        <div className="flex h-full flex-col items-center justify-center gap-5 rounded-[39px] bg-gradient-to-b from-slate-800 to-slate-950 px-8 text-center">
+                                            <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-fuchsia-400 bg-violet-900 text-3xl font-bold text-white">B</div>
+                                            <h2 className="text-2xl font-bold text-white">Your profile belongs here</h2>
+                                            <p className="text-sm leading-relaxed text-slate-300">Discover creators on BioLync Pro mini. The platform owner can select a featured public profile in Admin → Homepage Sections.</p>
+                                            <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-violet-600 to-pink-600 px-6 py-3 text-sm font-semibold text-white">Create your profile</Link>
+                                        </div>
+                                    )}
+                                    <div aria-hidden="true" className="pointer-events-none absolute bottom-3 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-slate-400/50" />
                                 </div>
-                                {/* Home Indicator */}
-                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-gray-600 rounded-full"></div>
                             </div>
-                        </div>
+                        )}
+                        {section("hero").enabled && (
+                            <div className="min-w-0 text-center lg:text-left">
+                                <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/15 px-4 py-2 text-sm font-medium text-violet-700 dark:text-violet-200">
+                                    <Sparkles className="h-4 w-4" />
+                                    <span>100% Free • Open Source • No Ads</span>
+                                </div>
+                                <h1 className="mb-6 text-5xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl xl:text-7xl">
+                                    <span className="text-gray-900 dark:text-white">{section("hero").title}</span>
+                                    <span className="mt-1 block bg-gradient-to-r from-violet-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">{section("hero").subtitle}</span>
+                                </h1>
+                                <p className="mx-auto mb-9 max-w-xl text-lg leading-relaxed text-gray-600 dark:text-gray-300 lg:mx-0 sm:text-xl">{section("hero").body}</p>
+                                <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
+                                    <Link href={isSignedIn ? "/dashboard" : section("hero").primaryUrl || "/sign-up"} className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 to-pink-600 px-7 py-4 text-lg font-semibold text-white transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-500/30">
+                                        {isSignedIn ? "Go to Dashboard" : section("hero").primaryLabel}
+                                        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                    </Link>
+                                    {section("hero").secondaryLabel && (
+                                        <Link href={section("hero").secondaryUrl || "#features"} className="inline-flex items-center gap-2 px-6 py-4 text-lg font-medium text-gray-700 transition-colors hover:text-violet-600 dark:text-gray-200 dark:hover:text-violet-300">
+                                            {section("hero").secondaryLabel}<ChevronRight className="h-5 w-5" />
+                                        </Link>
+                                    )}
+                                </div>
+                            </div>
                         )}
                     </div>
-                </div>
-            </section>}
-
-
-            {/* Hero Section */}
-            {section("hero").enabled && <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        {/* Hero Text */}
-                        <div className="text-center lg:text-left">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300 text-sm font-medium mb-8 border border-violet-500/20">
-                                <Sparkles className="w-4 h-4" />
-                                <span>100% Free • Open Source • No Ads</span>
-                            </div>
-
-                            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                                <span className="text-gray-900 dark:text-white">{section("hero").title}</span>
-                                <br />
-                                <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                                    {section("hero").subtitle}
-                                </span>
-                            </h1>
-
-                            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed">
-                                {section("hero").body}
-                            </p>
-
-                            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                                <Link
-                                    href={isSignedIn ? "/dashboard" : section("hero").primaryUrl || "/sign-up"}
-                                    className="group inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-violet-600 to-pink-600 rounded-2xl hover:shadow-xl hover:shadow-violet-500/30 hover:-translate-y-1 transition-all duration-300"
-                                >
-                                    {isSignedIn ? "Go to Dashboard" : section("hero").primaryLabel}
-                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                                <Link
-                                    href={section("hero").secondaryUrl || "#features"}
-                                    className="inline-flex items-center gap-2 px-8 py-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
-                                >
-                                    {section("hero").secondaryLabel}
-                                    <ChevronRight className="w-5 h-5" />
-                                </Link>
-                            </div>
-                        </div>
-
-                        {/* Collapsing Logos Animation - Right Column */}
-                        <div className="hidden lg:flex justify-center flex-col items-center">
-                            <div className="relative scale-110">
-                                <div className="text-center mb-6">
-                                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">All your platforms</p>
-                                    <p className="text-2xl font-bold text-gray-900 dark:text-white">→ One Link</p>
-                                </div>
-                                <CollapsingLogosAnimation />
-                                <div className="mt-8 text-center h-12">
-                                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Trusted by</p>
-                                    <div className="text-2xl font-bold">
-                                        <TypewriterEffect words={[
-                                            "creators", "influencers", "small businesses", "athletes", "models", "monetizers",
-                                            "health educators", "streamers", "vloggers", "fitness coaches", "ecommerce sellers",
-                                            "retailers", "products", "wellness leaders", "musicians", "bands", "podcasters",
-                                            "fashion designers", "culture creators", "merch sellers", "writers", "DJs"
-                                        ]} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>}
-
-
+                </section>
+            )}
 
             {/* Features Section */}
             {section("features").enabled && <section id="features" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
