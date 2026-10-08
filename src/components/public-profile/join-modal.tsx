@@ -164,7 +164,7 @@ export default function JoinModal({ isOpen, onClose, isInline = false }: JoinMod
                         )}
                         {isAvailable === true && (
                             <p className="text-green-400 text-sm font-bold animate-in fade-in slide-in-from-top-1 px-2">
-                                Great choice! This MiniLink is available.
+                                Great choice! This BioLync Pro mini is available.
                             </p>
                         )}
 
@@ -176,7 +176,7 @@ export default function JoinModal({ isOpen, onClose, isInline = false }: JoinMod
                                 : 'bg-white/10 text-white/30 cursor-not-allowed'
                                 }`}
                         >
-                            {checking ? 'Checking...' : 'Claim your MiniLink'}
+                            {checking ? 'Checking...' : 'Claim your BioLync Pro mini'}
                         </button>
                     </div>
 
