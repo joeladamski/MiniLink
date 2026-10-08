@@ -7,7 +7,7 @@ export const DEFAULT_SECTIONS: SectionContent[] = [
   { key: 'features', enabled: true, title: 'Everything You Need', subtitle: 'Build your perfect link hub with powerful features designed for creators', body: '', primaryLabel: '', primaryUrl: '', secondaryLabel: '', secondaryUrl: '', sortOrder: 30 },
   { key: 'final_cta', enabled: true, title: 'Ready to Share', subtitle: 'Your World?', body: 'Create your personalized BioLync Pro mini in under 60 seconds. No credit card required.', primaryLabel: 'Get Started Free', primaryUrl: '/sign-up', secondaryLabel: '', secondaryUrl: '', sortOrder: 40 },
 ];
-export function mergeSections(rows: Partial<SectionContent>[]): SectionContent[] {
+export function mergeSections(rows: (Omit<Partial<SectionContent>, 'key'> & { key: string })[]): SectionContent[] {
   return DEFAULT_SECTIONS.map(def => ({ ...def, ...(rows.find(r => r.key === def.key) || {}) }));
 }
 export function safeDestination(url: string): boolean {
