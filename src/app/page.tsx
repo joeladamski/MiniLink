@@ -852,7 +852,7 @@ export default function HomePage() {
                                 </div>
                             </div>
                             <span className="font-bold text-xl tracking-tight">
-                                Mini<span className="bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text text-transparent">Link</span>
+                                {process.env.NEXT_PUBLIC_PLATFORM_NAME || "BioLync Pro mini"}
                             </span>
                         </Link>
 

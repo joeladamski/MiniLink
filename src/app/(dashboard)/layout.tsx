@@ -6,7 +6,7 @@ import { SiteFooter } from '@/components/site-footer';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: 'MiniLink | Dashboard',
+        title: `${process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'} | Dashboard`,
     };
 }
 
@@ -24,6 +24,7 @@ export default async function DashboardLayout({
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col">
             <DashboardNav
+                isPlatformOwner={Boolean(process.env.PLATFORM_OWNER_CLERK_USER_ID && user.id === process.env.PLATFORM_OWNER_CLERK_USER_ID)}
                 user={{
                     name: `${user.firstName} ${user.lastName}`,
                     email: user.emailAddresses[0]?.emailAddress,

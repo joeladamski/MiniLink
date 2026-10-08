@@ -19,6 +19,7 @@ import {
 import { useState, useEffect } from 'react';
 
 interface DashboardNavProps {
+    isPlatformOwner: boolean;
     user: {
         name?: string | null;
         email?: string | null;
@@ -27,7 +28,7 @@ interface DashboardNavProps {
     };
 }
 
-export default function DashboardNav({ user }: DashboardNavProps) {
+export default function DashboardNav({ user, isPlatformOwner }: DashboardNavProps) {
     const pathname = usePathname();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDark, setIsDark] = useState(false);
@@ -65,6 +66,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
         { href: '/dashboard/appearance', icon: Palette, label: 'Appearance' },
         { href: '/dashboard/analytics', icon: BarChart3, label: 'Analytics' },
         { href: '/dashboard/settings', icon: Settings, label: 'Settings' },
+        ...(isPlatformOwner ? [{ href: '/admin', icon: Settings, label: 'Admin' }] : []),
     ];
 
     const profileUrl = user.username ? `/${user.username}` : null;
@@ -82,7 +84,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
                             </div>
                         </div>
                         <span className="font-bold text-xl tracking-tight hidden sm:block">
-                            Mini<span className="bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text text-transparent">Link</span>
+                            {process.env.NEXT_PUBLIC_PLATFORM_NAME || "BioLync Pro mini"}
                         </span>
                     </Link>
 
