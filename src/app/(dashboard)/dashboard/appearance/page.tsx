@@ -61,7 +61,7 @@ export default function AppearancePage() {
         avatarLayout: 'classic',
         links: [] as any[],
     });
-    const isAdmin = profile.username?.toLowerCase() === 'tusharbhardwaj';
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -77,6 +77,7 @@ export default function AppearancePage() {
             ]);
 
             const profileData = await profileRes.json();
+            setIsAdmin(profileRes.ok && profileData?.isPlatformOwner === true);
             const linksData = await linksRes.json();
 
             setProfile({
