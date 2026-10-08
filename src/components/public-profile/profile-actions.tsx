@@ -15,11 +15,13 @@ interface ProfileActionsProps {
         customThemeCard: string | null;
         customThemeText: string | null;
     };
+    showJoinBadge?: boolean;
+    showShareButton?: boolean;
     isInline?: boolean;
     onOpenChange?: (isOpen: boolean) => void;
 }
 
-export default function ProfileActions({ user, isInline = false, onOpenChange }: ProfileActionsProps) {
+export default function ProfileActions({ user, isInline = false, onOpenChange, showJoinBadge = true, showShareButton = true }: ProfileActionsProps) {
     const [isJoinOpen, setIsJoinOpen] = useState(false);
     const [isShareOpen, setIsShareOpen] = useState(false);
 
@@ -49,7 +51,7 @@ export default function ProfileActions({ user, isInline = false, onOpenChange }:
     return (
         <>
             {/* Top Left - Join Button */}
-            <div className={`${isInline ? 'absolute top-4 left-4' : 'fixed top-6 left-6'} z-50`}>
+            {showJoinBadge && <div className={`${isInline ? 'absolute top-4 left-4' : 'fixed top-6 left-6'} z-50`}>
                 <button
                     onClick={() => setIsJoinOpen(true)}
                     className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all shadow-lg active:scale-95 group"
@@ -57,10 +59,10 @@ export default function ProfileActions({ user, isInline = false, onOpenChange }:
                 >
                     <span className="text-xl font-black bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">M</span>
                 </button>
-            </div>
+            </div>}
 
             {/* Top Right - Share Button */}
-            <div className={`${isInline ? 'absolute top-4 right-4' : 'fixed top-6 right-6'} z-50`}>
+            {showShareButton && <div className={`${isInline ? 'absolute top-4 right-4' : 'fixed top-6 right-6'} z-50`}>
                 <button
                     onClick={() => setIsShareOpen(true)}
                     className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all shadow-lg active:scale-95 group"
@@ -68,7 +70,7 @@ export default function ProfileActions({ user, isInline = false, onOpenChange }:
                 >
                     <Share2 className="w-5 h-5 text-gray-800 group-hover:rotate-12 transition-transform" />
                 </button>
-            </div>
+            </div>}
 
             {/* Modals */}
             <JoinModal
