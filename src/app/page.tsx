@@ -920,28 +920,31 @@ export default function HomePage() {
                                 <div aria-hidden="true" className="pointer-events-none absolute h-[380px] w-[380px] max-w-full rounded-full border border-fuchsia-500/30 shadow-[0_0_100px_rgba(139,92,246,0.3)]" />
                                 <div aria-hidden="true" className="pointer-events-none absolute left-[5%] top-[18%] hidden h-14 w-14 -rotate-12 items-center justify-center rounded-2xl border border-pink-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(236,72,153,0.3)] sm:flex">✦</div>
                                 <div aria-hidden="true" className="pointer-events-none absolute right-[7%] bottom-[18%] hidden h-14 w-14 rotate-12 items-center justify-center rounded-2xl border border-violet-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(139,92,246,0.3)] sm:flex">↗</div>
-                                <div className="relative h-[630px] w-[340px] max-w-full overflow-hidden rounded-[53px] border-[5px] border-slate-700 bg-slate-950 p-[10px] shadow-[0_0_45px_rgba(99,102,241,0.45)] ring-1 ring-violet-500/50">
-                                    <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[17px] z-20 h-7 w-28 -translate-x-1/2 rounded-full bg-black" />
-                                    {featuredUsername ? (
-                                        <div className="relative h-full overflow-hidden rounded-[39px] bg-slate-900">
-                                            <iframe
-                                                key={featuredUsername}
-                                                title={`Featured creator: @${featuredUsername}`}
-                                                src={`/${encodeURIComponent(featuredUsername)}`}
-                                                loading="lazy"
-                                                referrerPolicy="same-origin"
-                                                className="absolute left-0 top-0 h-[760px] w-[390px] origin-top-left scale-[0.79] border-0 bg-slate-900"
-                                            />
-                                        </div>
-                                    ) : (
-                                        <div className="flex h-full flex-col items-center justify-center gap-5 rounded-[39px] bg-gradient-to-b from-slate-800 to-slate-950 px-8 text-center">
-                                            <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-fuchsia-400 bg-violet-900 text-3xl font-bold text-white">B</div>
-                                            <h2 className="text-2xl font-bold text-white">Your profile belongs here</h2>
-                                            <p className="text-sm leading-relaxed text-slate-300">Discover creators on BioLync Pro mini. The platform owner can select a featured public profile in Admin → Homepage Sections.</p>
-                                            <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-violet-600 to-pink-600 px-6 py-3 text-sm font-semibold text-white">Create your profile</Link>
-                                        </div>
-                                    )}
-                                    <div aria-hidden="true" className="pointer-events-none absolute bottom-3 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-slate-400/50" />
+                                <div className="relative w-full max-w-[520px]">
+                                    <div className="relative overflow-hidden rounded-[32px] border border-violet-300/50 bg-slate-950 p-2 shadow-[0_0_48px_rgba(139,92,246,0.35),0_24px_60px_rgba(0,0,0,0.35)] ring-1 ring-fuchsia-500/40 sm:p-3">
+                                        {featuredUsername ? (
+                                            <div className="relative h-[600px] overflow-hidden rounded-[24px] bg-slate-900 sm:h-[680px]">
+                                                <iframe
+                                                    key={featuredUsername}
+                                                    title={`Featured creator: @${featuredUsername}`}
+                                                    src={`/${encodeURIComponent(featuredUsername)}`}
+                                                    loading="lazy"
+                                                    referrerPolicy="same-origin"
+                                                    className="h-full w-full border-0 bg-slate-900"
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="flex h-[600px] flex-col items-center justify-center gap-5 rounded-[24px] bg-gradient-to-b from-slate-800 to-slate-950 px-8 text-center sm:h-[680px]">
+                                                <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-fuchsia-400 bg-violet-900 text-3xl font-bold text-white">B</div>
+                                                <h2 className="text-2xl font-bold text-white">Your profile belongs here</h2>
+                                                <p className="text-sm leading-relaxed text-slate-300">Discover creators on BioLync Pro mini. The platform owner can select a featured public profile in Admin → Homepage Sections.</p>
+                                                <Link href="/sign-up" className="rounded-xl bg-gradient-to-r from-violet-600 to-pink-600 px-6 py-3 text-sm font-semibold text-white">Create your profile</Link>
+                                            </div>
+                                        )}
+                                        <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-br from-white/15 via-transparent to-violet-300/5" />
+                                        <div aria-hidden="true" className="pointer-events-none absolute -left-1/3 top-0 h-1/2 w-2/3 -rotate-12 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
+                                    </div>
+                                    <div aria-hidden="true" className="pointer-events-none mx-auto mt-1 h-10 w-[85%] rounded-[50%] bg-violet-500/20 blur-2xl" />
                                 </div>
                             </div>
                         )}
