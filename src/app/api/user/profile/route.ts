@@ -59,7 +59,7 @@ export async function GET() {
             }
         }
 
-        return NextResponse.json(user);
+        return NextResponse.json({ ...user, isPlatformOwner: !!process.env.PLATFORM_OWNER_CLERK_USER_ID && userId === process.env.PLATFORM_OWNER_CLERK_USER_ID });
     } catch (error) {
         console.error('Error fetching profile:', error);
         return NextResponse.json({ error: 'Failed to fetch profile' }, { status: 500 });
@@ -79,15 +79,11 @@ export async function PUT(request: NextRequest) {
 
         // Admin-exclusivity check for Cover Banner layout
         if (avatarLayout === 'cover') {
-            const dbUser = await prisma.user.findUnique({
-                where: { id: userId },
-                select: { username: true },
-            });
-            const isAdmin = dbUser?.username?.toLowerCase() === 'tusharbhardwaj';
+            const isAdmin = !!process.env.PLATFORM_OWNER_CLERK_USER_ID && userId === process.env.PLATFORM_OWNER_CLERK_USER_ID;
 
             if (!isAdmin) {
                 return NextResponse.json(
-                    { error: 'The Cover Banner layout is exclusive to the platform founder.' },
+                    { error: 'This layout requires platform owner permissions.' },
                     { status: 403 }
                 );
             }
