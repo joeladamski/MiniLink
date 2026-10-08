@@ -80,7 +80,7 @@ export default async function ProfilePage({ params }: Props) {
         },
     });
 
-    const isAdmin = user.username?.toLowerCase() === 'tusharbhardwaj';
+    const isAdmin = !!process.env.PLATFORM_OWNER_CLERK_USER_ID && user.id === process.env.PLATFORM_OWNER_CLERK_USER_ID;
     const themeClass = `theme-${user.theme || 'default'}`;
 
     const customStyles = user.theme === 'custom' ? {
