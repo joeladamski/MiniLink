@@ -55,7 +55,7 @@ export default function ProfileActions({ user, isInline = false, onOpenChange, s
                 <button
                     onClick={() => setIsJoinOpen(true)}
                     className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all shadow-lg active:scale-95 group"
-                    aria-label="Join MiniLink"
+                    aria-label="Join BioLync Pro mini"
                 >
                     <span className="text-xl font-black bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">M</span>
                 </button>
