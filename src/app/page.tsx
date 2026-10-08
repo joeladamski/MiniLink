@@ -909,14 +909,14 @@ export default function HomePage() {
 
             {/* Unified featured-creator hero: real preview left, editable promotional copy right. */}
             {(section("hero").enabled || (showHomepageLivePreview && section("live_preview").enabled)) && (
-                <section className="relative overflow-hidden px-4 pb-12 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-16">
+                <section className="relative overflow-hidden px-4 pb-8 pt-[5px] sm:px-6 lg:px-8 lg:pb-12">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
                         <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
                         <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-fuchsia-600/10 blur-3xl" />
                     </div>
-                    <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                    <div className="relative mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-2 lg:gap-12">
                         {showHomepageLivePreview && section("live_preview").enabled && (
-                            <div className="relative flex min-w-0 items-center justify-center py-4 sm:py-8" aria-label="Featured creator profile">
+                            <div className="relative flex min-w-0 items-start justify-center py-0" aria-label="Featured creator profile">
                                 <div aria-hidden="true" className="pointer-events-none absolute h-[380px] w-[380px] max-w-full rounded-full border border-fuchsia-500/30 shadow-[0_0_100px_rgba(139,92,246,0.3)]" />
                                 <div aria-hidden="true" className="pointer-events-none absolute left-[5%] top-[18%] hidden h-14 w-14 -rotate-12 items-center justify-center rounded-2xl border border-pink-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(236,72,153,0.3)] sm:flex">✦</div>
                                 <div aria-hidden="true" className="pointer-events-none absolute right-[7%] bottom-[18%] hidden h-14 w-14 rotate-12 items-center justify-center rounded-2xl border border-violet-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(139,92,246,0.3)] sm:flex">↗</div>
