@@ -86,5 +86,8 @@ model PlatformSettings {
   id                    String   @id @default("primary")
   showFloatingAssistant Boolean  @default(true)
   showAcquisitionButton Boolean  @default(true)
+  showProfileJoinBadge   Boolean  @default(true)
+  showProfileShareButton Boolean  @default(true)
+  showHomepageLivePreview Boolean @default(true)
   updatedAt             DateTime @updatedAt
 }
