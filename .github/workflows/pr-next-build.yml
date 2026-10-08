@@ -1,0 +1,27 @@
+name: PR Next.js Build Check
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [build-004d-featured-hero]
+  workflow_dispatch:
+jobs:
+  next-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: postgresql://test:test@localhost:5432/test
+      DIRECT_URL: postgresql://test:test@localhost:5432/test
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_ZXhhbXBsZS5jb20k
+      CLERK_SECRET_KEY: sk_test_placeholder
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx prisma generate
+      - name: Compile Next.js without schema mutation
+        run: npx next build
