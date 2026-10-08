@@ -179,7 +179,7 @@ export default function RebrandPromoBot({
                         {/* Chat Bubble Message */}
                         <div className="text-left text-xs sm:text-[13px] leading-relaxed font-medium z-10" style={{ color: 'color-mix(in srgb, var(--theme-text) 90%, transparent)' }}>
                             Hey there! 👋 <br />
-                            <span className="font-extrabold" style={{ color: 'var(--theme-text)' }}>{firstName}</span> created this premium, high-speed profile in seconds using <a href="/" className="font-extrabold hover:underline transition-all duration-300" style={{ color: activeColors.primary }}>MiniLink</a>. <br />
+                            <span className="font-extrabold" style={{ color: 'var(--theme-text)' }}>{firstName}</span> created this premium, high-speed profile in seconds using <a href="/" className="font-extrabold hover:underline transition-all duration-300" style={{ color: activeColors.primary }} >{process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'}</a>. <br />
                             You can claim and build yours for free too!
                         </div>
 
@@ -192,7 +192,7 @@ export default function RebrandPromoBot({
                                 boxShadow: `0 4px 15px color-mix(in srgb, ${activeColors.primary} 30%, transparent)`
                             }}
                         >
-                            Create your own MiniLink
+                            Create your own {process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'}
                             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                         </a>
                     </div>
