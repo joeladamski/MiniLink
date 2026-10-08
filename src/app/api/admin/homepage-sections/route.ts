@@ -19,7 +19,7 @@ export async function PUT(request: Request) {
   const s = obj.section as Record<string, unknown>;
   const fields = ['key','enabled','title','subtitle','body','primaryLabel','primaryUrl','secondaryLabel','secondaryUrl','sortOrder','featuredUsername'];
   if (Object.keys(s).some(k => !fields.includes(k)) || !SECTION_KEYS.includes(s.key as any) || typeof s.enabled !== 'boolean' || !Number.isInteger(s.sortOrder) || (s.sortOrder as number) < 0 || (s.sortOrder as number) > 999) return NextResponse.json({ error: 'Invalid section fields' }, { status: 400 });
-  for (const field of fields.filter(k => !['key','enabled','sortOrder'].includes(k))) {
+  for (const field of fields.filter(k => !['key','enabled','sortOrder','featuredUsername'].includes(k))) {
     if (typeof s[field] !== 'string' || (s[field] as string).length > (field === 'body' ? 1000 : 200)) return NextResponse.json({ error: 'Invalid text for ' + field }, { status: 400 });
   }
   if ((s.primaryUrl && !safeDestination(s.primaryUrl as string)) || (s.secondaryUrl && !safeDestination(s.secondaryUrl as string))) return NextResponse.json({ error: 'Only local /path or #section links are allowed' }, { status: 400 });
