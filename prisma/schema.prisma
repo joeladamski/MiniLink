@@ -81,3 +81,10 @@ model PageView {
   @@index([userId, createdAt])
   @@index([userId])
 }
+
+model PlatformSettings {
+  id                    String   @id @default("primary")
+  showFloatingAssistant Boolean  @default(true)
+  showAcquisitionButton Boolean  @default(true)
+  updatedAt             DateTime @updatedAt
+}

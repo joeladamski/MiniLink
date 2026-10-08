@@ -25,16 +25,16 @@ export async function generateMetadata({ params }: Props) {
 
     if (!user) {
         return {
-            title: `Claim /${params.username} | MiniLink`,
-            description: `The username /${params.username} is available! Claim it now on MiniLink to build your perfect profile.`,
+            title: `Claim /${params.username} | ${process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'}`,
+            description: `The username /${params.username} is available! Claim it now on ${process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'} to build your perfect profile.`,
         };
     }
 
     return {
-        title: `${user.name || user.username} | MiniLink`,
+        title: `${user.name || user.username} | ${process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'}`,
         description: user.bio || `Check out ${user.name || user.username}'s links`,
         openGraph: {
-            title: `${user.name || user.username} | MiniLink`,
+            title: `${user.name || user.username} | ${process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'}`,
             description: user.bio || `Check out ${user.name || user.username}'s links`,
         },
         icons: {
@@ -66,6 +66,8 @@ export default async function ProfilePage({ params }: Props) {
     if (!user) {
         return <UnclaimedProfile username={params.username} />;
     }
+
+    const platformSettings = await prisma.platformSettings.findUnique({ where: { id: 'primary' } });
 
     // Record page view
     const headersList = headers();
@@ -312,16 +314,16 @@ export default async function ProfilePage({ params }: Props) {
                 <ProfileLinks links={user.links} />
 
                 {/* Footer - Promotional */}
-                <PromoFooter name={user.name || `@${user.username}`} />
+                {platformSettings?.showAcquisitionButton !== false && <PromoFooter name={user.name || `@${user.username}`} />}
             </div>
-            <RebrandPromoBot
+            {platformSettings?.showFloatingAssistant !== false && <RebrandPromoBot
                 username={user.username}
                 name={user.name}
                 theme={user.theme}
                 customThemeBg={user.customThemeBg}
                 customThemeCard={user.customThemeCard}
                 customThemeText={user.customThemeText}
-            />
+            />}
         </div>
     );
 }

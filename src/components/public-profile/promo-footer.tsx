@@ -16,7 +16,7 @@ export default function PromoFooter({ name }: PromoFooterProps) {
                 href="/"
                 className="pointer-events-auto inline-flex items-center justify-center px-10 py-4 bg-white text-gray-900 rounded-full text-[15px] font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 border border-gray-200"
             >
-                Join {displayName} on MiniLink
+                Join {displayName} on {process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini'}
             </Link>
         </div>
     );

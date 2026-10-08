@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     title: `${process.env.NEXT_PUBLIC_PLATFORM_NAME || 'MiniLink'} - Build Your Link in Bio`,
     description: 'MiniLink is the ultimate link-in-bio tool for creators, influencers, and businesses. Share all your content, social profiles, and products with a single, highly customizable URL.',
     keywords: ['linktree alternative', 'link in bio', 'social media links', 'creator tools', 'portfolio link', 'custom bio link'],
-    authors: [{ name: 'Tushar Bhardwaj', url: 'https://tushar-bhardwaj.vercel.app' }],
+    authors: [{ name: process.env.NEXT_PUBLIC_PLATFORM_NAME || 'BioLync Pro mini' }],
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
     openGraph: {
-        title: 'MiniLink - Build Your Free Link in Bio',
+        title: 'BioLync Pro mini - Creator Identity',
         description: 'Share all your links, content, and products with one powerful, customizable bio link. Fast, secure, and 100% free.',
         url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
         siteName: process.env.NEXT_PUBLIC_PLATFORM_NAME || 'MiniLink',
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'MiniLink - Build Your Free Link in Bio',
+        title: 'BioLync Pro mini - Creator Identity',
         description: 'Create your personalized link-in-bio page in seconds. Open-source, fast, and completely free.',
-        creator: '@Tusharab2004',
+        
         images: ['/og-image.png'],
     },
     robots: {
