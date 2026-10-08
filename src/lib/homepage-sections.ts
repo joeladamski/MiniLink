@@ -1,6 +1,6 @@
 export const SECTION_KEYS = ['hero', 'live_preview', 'features', 'final_cta'] as const;
 export type SectionKey = typeof SECTION_KEYS[number];
-export type SectionContent = { key: SectionKey; enabled: boolean; title: string; subtitle: string; body: string; primaryLabel: string; primaryUrl: string; secondaryLabel: string; secondaryUrl: string; sortOrder: number };
+export type SectionContent = { key: SectionKey; enabled: boolean; title: string; subtitle: string; body: string; primaryLabel: string; primaryUrl: string; secondaryLabel: string; secondaryUrl: string; sortOrder: number; featuredUsername?: string | null };
 export const DEFAULT_SECTIONS: SectionContent[] = [
   { key: 'hero', enabled: true, title: 'One Link For', subtitle: 'Everything You Create', body: 'Create your personalized link hub in seconds. Share your content, track your impact, and grow your audience — completely free.', primaryLabel: 'Create Your BioLync Pro mini', primaryUrl: '/sign-up', secondaryLabel: 'See Features', secondaryUrl: '#features', sortOrder: 10 },
   { key: 'live_preview', enabled: true, title: 'See It In Action', subtitle: 'Watch how easily you can build and customize your page in real-time.', body: '', primaryLabel: '', primaryUrl: '', secondaryLabel: '', secondaryUrl: '', sortOrder: 20 },

@@ -93,6 +93,7 @@ model PlatformSettings {
 }
 
 model HomepageSection {
+  featuredUsername String? 
   key            String   @id
   enabled        Boolean  @default(true)
   title          String   @default("")
