@@ -8,7 +8,12 @@ export const DEFAULT_SECTIONS: SectionContent[] = [
   { key: 'final_cta', enabled: true, title: 'Ready to Share', subtitle: 'Your World?', body: 'Create your personalized BioLync Pro mini in under 60 seconds. No credit card required.', primaryLabel: 'Get Started Free', primaryUrl: '/sign-up', secondaryLabel: '', secondaryUrl: '', sortOrder: 40 },
 ];
 export function mergeSections(rows: (Omit<Partial<SectionContent>, 'key'> & { key: string })[]): SectionContent[] {
-  return DEFAULT_SECTIONS.map(def => ({ ...def, ...(rows.find(r => r.key === def.key) || {}) }));
+  return DEFAULT_SECTIONS.map(def => {
+    const stored = rows.find(r => r.key === def.key);
+    if (!stored) return def;
+    const { key: _databaseKey, ...overrides } = stored;
+    return { ...def, ...overrides };
+  });
 }
 export function safeDestination(url: string): boolean {
   return (url.startsWith('/') && !url.startsWith('//') || /^#[a-zA-Z][a-zA-Z0-9_-]*$/.test(url)) && !url.includes('\\') && !/[\r\n]/.test(url);
