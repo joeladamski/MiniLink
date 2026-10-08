@@ -1172,7 +1172,7 @@ export default function HomePage() {
                                         Your data is protected with enterprise-grade security. Fully open source — contribute, customize, or self-host.
                                     </p>
                                 </div>
-                                <Link href="https://github.com/TuShArBhArDwA/BioLync Pro mini" target="_blank" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+                                <Link href="https://github.com/joeladamski/MiniLink" target="_blank" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
                                     <Github className="w-5 h-5" />
                                     <span>View on GitHub</span>
                                 </Link>
