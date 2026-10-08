@@ -943,7 +943,6 @@ export default function HomePage() {
                                 </div>
                             </div>
                         ) : (
-                        {/* iPhone Mockup (Result) */}
                         <div className="relative mt-8 lg:mt-0 transform scale-[0.85] sm:scale-100 transition-transform duration-500">
                             {/* Live Preview Label */}
                             <div className="absolute -top-8 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-violet-600 to-pink-600 rounded-full shadow-lg z-20">
