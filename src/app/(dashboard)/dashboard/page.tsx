@@ -16,7 +16,7 @@ import CopyButton from '@/components/dashboard/copy-button';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Dashboard | MiniLink',
+    title: 'Dashboard | BioLync Pro mini',
 };
 
 export default async function DashboardPage() {
@@ -201,7 +201,7 @@ export default async function DashboardPage() {
                     Welcome back, {dbUser?.name || clerkUser.firstName}! 👋
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                    Here is how your MiniLink is performing
+                    Here is how your BioLync Pro mini is performing
                 </p>
             </div>
 
@@ -212,7 +212,7 @@ export default async function DashboardPage() {
 
                     <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                         <div>
-                            <p className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-accent-600 dark:from-primary-400 dark:to-accent-400 uppercase tracking-wider mb-2">Your MiniLink URL</p>
+                            <p className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-accent-600 dark:from-primary-400 dark:to-accent-400 uppercase tracking-wider mb-2">Your BioLync Pro mini URL</p>
                             <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white break-all">{profileUrl}</p>
                         </div>
                         <div className="flex items-center gap-3 w-full sm:w-auto">
