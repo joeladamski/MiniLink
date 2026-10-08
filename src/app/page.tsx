@@ -786,8 +786,15 @@ export default function HomePage() {
 
     const toggleTheme = () => {
         setIsDark(!isDark);
-        document.documentElement.classList.toggle('dark');
+        document.documentElement.classList.toggle('dark', !isDark);
     };
+
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', isDark);
+        document.documentElement.style.backgroundColor = isDark ? '#0a0a0f' : '#fafafa';
+        document.body.style.backgroundColor = isDark ? '#0a0a0f' : '#fafafa';
+        return () => { document.documentElement.style.backgroundColor = ''; document.body.style.backgroundColor = ''; };
+    }, [isDark]);
 
     const features = [
         {
@@ -927,7 +934,7 @@ export default function HomePage() {
                                                 <iframe
                                                     key={featuredUsername}
                                                     title={`Featured creator: @${featuredUsername}`}
-                                                    src={`/${encodeURIComponent(featuredUsername)}`}
+                                                    src={`/${encodeURIComponent(featuredUsername)}?featuredPreviewTheme=${isDark ? "dark" : "light"}`}
                                                     loading="lazy"
                                                     referrerPolicy="same-origin"
                                                     className="h-full w-full border-0 bg-slate-900"

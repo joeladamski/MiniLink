@@ -15,6 +15,7 @@ import RebrandPromoBot from '@/components/public-profile/rebrand-promo-bot';
 
 interface Props {
     params: { username: string };
+    searchParams?: { featuredPreviewTheme?: string };
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: Props) {
     };
 }
 
-export default async function ProfilePage({ params }: Props) {
+export default async function ProfilePage({ params, searchParams }: Props) {
     const user = await prisma.user.findUnique({
         where: { username: params.username },
         include: {
@@ -83,7 +84,10 @@ export default async function ProfilePage({ params }: Props) {
     });
 
     const isAdmin = !!process.env.PLATFORM_OWNER_CLERK_USER_ID && user.id === process.env.PLATFORM_OWNER_CLERK_USER_ID;
-    const themeClass = `theme-${user.theme || 'default'}`;
+    // Preview-only appearance: respect explicitly chosen creator themes.
+    const previewTheme = searchParams?.featuredPreviewTheme === 'dark' ? 'dark' : 'default';
+    const effectiveTheme = !user.theme || user.theme === 'default' ? previewTheme : user.theme;
+    const themeClass = `theme-${effectiveTheme}`;
 
     const customStyles = user.theme === 'custom' ? {
         '--theme-bg': user.customThemeBg || '#05010d',
@@ -107,7 +111,9 @@ export default async function ProfilePage({ params }: Props) {
                 customThemeText: user.customThemeText
             }} />
             <div className={`max-w-lg mx-auto px-4 pb-12 ${
-                user.avatarLayout === 'cover' ? 'pt-24 sm:pt-12' : 'pt-12'
+                searchParams?.featuredPreviewTheme === 'dark' || searchParams?.featuredPreviewTheme === 'light'
+                    ? 'pt-1'
+                    : user.avatarLayout === 'cover' ? 'pt-24 sm:pt-12' : 'pt-12'
             }`}>
                 {/* Profile Header (Dynamic layout chosen by user) */}
                 {(!user.avatarLayout || user.avatarLayout === 'classic') && (
