@@ -37,7 +37,7 @@ function LaptopDemo({ isDark }: { isDark: boolean }) {
         { title: 'Create your profile', subtitle: 'Choose your username' },
         { title: 'Add your first link', subtitle: 'Connect your socials' },
         { title: 'Your links are ready', subtitle: 'All connected!' },
-        { title: 'Share your MiniLink!', subtitle: 'Copy & share' },
+        { title: 'Share your BioLync Pro mini!', subtitle: 'Copy & share' },
     ];
 
     const username = 'tushar';
@@ -242,7 +242,7 @@ function LaptopDemo({ isDark }: { isDark: boolean }) {
                                     Congratulations!
                                 </h3>
                                 <p className="text-gray-600 dark:text-gray-400 text-sm text-center">
-                                    Your MiniLink is ready to share
+                                    Your BioLync Pro mini is ready to share
                                 </p>
                                 <div className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-pink-600 text-white rounded-lg px-4 py-2 shadow-lg">
                                     <span className="text-sm font-medium">link.minianon.in/tushar</span>
@@ -318,7 +318,7 @@ function CollapsingLogosAnimation() {
                 </div>
             ))}
 
-            {/* Center MiniLink logo that appears */}
+            {/* Center BioLync Pro mini logo that appears */}
             <div
                 className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${phase === 2 ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
             >
@@ -765,9 +765,11 @@ export default function HomePage() {
     const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
     const [openFAQ, setOpenFAQ] = useState<number | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [showHomepageLivePreview, setShowHomepageLivePreview] = useState(true);
 
     useEffect(() => {
         setMounted(true);
+        fetch('/api/public/platform-features', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(data => { if (data && typeof data.showHomepageLivePreview === 'boolean') setShowHomepageLivePreview(data.showHomepageLivePreview); }).catch(() => {});
         // Check system preference
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             setIsDark(true);
@@ -927,7 +929,7 @@ export default function HomePage() {
                                     href={isSignedIn ? "/dashboard" : "/sign-up"}
                                     className="group inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-violet-600 to-pink-600 rounded-2xl hover:shadow-xl hover:shadow-violet-500/30 hover:-translate-y-1 transition-all duration-300"
                                 >
-                                    {isSignedIn ? "Go to Dashboard" : "Create Your MiniLink"}
+                                    {isSignedIn ? "Go to Dashboard" : "Create Your BioLync Pro mini"}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                                 <Link
@@ -968,7 +970,7 @@ export default function HomePage() {
 
 
             {/* Live Demo Section */}
-            <section className="py-12 sm:py-24 relative overflow-hidden">
+            {showHomepageLivePreview && <section className="py-12 sm:py-24 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
                         <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl mb-4">
@@ -1071,7 +1073,7 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>}
 
             {/* Features Section */}
             <section id="features" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -1170,7 +1172,7 @@ export default function HomePage() {
                                         Your data is protected with enterprise-grade security. Fully open source — contribute, customize, or self-host.
                                     </p>
                                 </div>
-                                <Link href="https://github.com/TuShArBhArDwA/MiniLink" target="_blank" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+                                <Link href="https://github.com/joeladamski/MiniLink" target="_blank" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
                                     <Github className="w-5 h-5" />
                                     <span>View on GitHub</span>
                                 </Link>
@@ -1188,7 +1190,7 @@ export default function HomePage() {
                             Questions? <span className="bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">Answered</span>
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
-                            Everything you need to know about MiniLink
+                            Everything you need to know about BioLync Pro mini
                         </p>
                     </div>
 
@@ -1196,35 +1198,35 @@ export default function HomePage() {
                         {[
                             {
                                 q: "Why do I need a link in bio tool?",
-                                a: "Social media platforms typically only allow one clickable link in your bio. MiniLink lets you share all your important links — your website, social profiles, online store, and more — through a single, customizable landing page."
+                                a: "Social media platforms typically only allow one clickable link in your bio. BioLync Pro mini lets you share all your important links — your website, social profiles, online store, and more — through a single, customizable landing page."
                             },
                             {
-                                q: "Is MiniLink the original link in bio tool?",
-                                a: "MiniLink is a modern, open-source alternative to other link-in-bio tools. We focus on simplicity, speed, and giving you full control over your online presence without any ads or hidden costs."
+                                q: "Is BioLync Pro mini the original link in bio tool?",
+                                a: "BioLync Pro mini is a modern, open-source alternative to other link-in-bio tools. We focus on simplicity, speed, and giving you full control over your online presence without any ads or hidden costs."
                             },
                             {
-                                q: "Can you get paid and sell things from a MiniLink?",
-                                a: "Yes! You can add links to your online store, payment platforms like PayPal or Stripe, or any e-commerce solution. MiniLink helps you direct traffic to wherever you want to monetize."
+                                q: "Can you get paid and sell things from a BioLync Pro mini?",
+                                a: "Yes! You can add links to your online store, payment platforms like PayPal or Stripe, or any e-commerce solution. BioLync Pro mini helps you direct traffic to wherever you want to monetize."
                             },
                             {
-                                q: "Is MiniLink safe to use on all of my social media profiles?",
-                                a: "Absolutely! MiniLink is 100% safe and trusted by thousands of creators. Our links work seamlessly across Instagram, TikTok, Twitter, YouTube, and all other major platforms."
+                                q: "Is BioLync Pro mini safe to use on all of my social media profiles?",
+                                a: "Absolutely! BioLync Pro mini is 100% safe and trusted by thousands of creators. Our links work seamlessly across Instagram, TikTok, Twitter, YouTube, and all other major platforms."
                             },
                             {
-                                q: "What makes MiniLink better than other link in bio options?",
-                                a: "MiniLink is completely free, open-source, and ad-free. We offer beautiful themes, real-time analytics, and lightning-fast load times. Plus, you can self-host it if you want complete control."
+                                q: "What makes BioLync Pro mini better than other link in bio options?",
+                                a: "BioLync Pro mini is completely free, open-source, and ad-free. We offer beautiful themes, real-time analytics, and lightning-fast load times. Plus, you can self-host it if you want complete control."
                             },
                             {
-                                q: "How can I drive more traffic to and through my MiniLink?",
-                                a: "Share your MiniLink URL everywhere — in your social bios, email signatures, business cards, and content. Use our analytics to understand what links perform best and optimize accordingly."
+                                q: "How can I drive more traffic to and through my BioLync Pro mini?",
+                                a: "Share your BioLync Pro mini URL everywhere — in your social bios, email signatures, business cards, and content. Use our analytics to understand what links perform best and optimize accordingly."
                             },
                             {
-                                q: "How many links should I have on my MiniLink?",
+                                q: "How many links should I have on my BioLync Pro mini?",
                                 a: "There's no limit! However, we recommend keeping it focused. 5-10 links is ideal for most creators. Prioritize your most important destinations at the top for maximum engagement."
                             },
                             {
-                                q: "Do I need a website to use MiniLink?",
-                                a: "Not at all! MiniLink can serve as your complete online presence. Many creators use their MiniLink page as their primary hub without needing a separate website."
+                                q: "Do I need a website to use BioLync Pro mini?",
+                                a: "Not at all! BioLync Pro mini can serve as your complete online presence. Many creators use their BioLync Pro mini page as their primary hub without needing a separate website."
                             }
                         ].map((faq, index) => (
                             <FAQItem
@@ -1287,7 +1289,7 @@ export default function HomePage() {
                             </h2>
 
                             <p className="text-white/80 mb-10 text-lg sm:text-xl max-w-2xl mx-auto">
-                                Create your personalized MiniLink in under 60 seconds. No credit card required.
+                                Create your personalized BioLync Pro mini in under 60 seconds. No credit card required.
                             </p>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

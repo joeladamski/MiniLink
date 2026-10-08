@@ -97,7 +97,7 @@ export default async function ProfilePage({ params }: Props) {
 
     return (
         <div className={`min-h-screen overflow-x-hidden ${themeClass}`} style={customStyles}>
-            <ProfileActions user={{
+            <ProfileActions showJoinBadge={platformSettings?.showProfileJoinBadge !== false} showShareButton={platformSettings?.showProfileShareButton !== false} user={{
                 name: user.name,
                 username: user.username,
                 avatar: user.avatar,

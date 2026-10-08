@@ -200,7 +200,7 @@ export default function SettingsPage() {
                                 <Globe className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                             </div>
                             <div>
-                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">Your MiniLink URL</h2>
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">Your BioLync Pro mini URL</h2>
                                 <p className="text-sm text-gray-500 dark:text-gray-400">Choose a unique handle for your profile.</p>
                             </div>
                         </div>

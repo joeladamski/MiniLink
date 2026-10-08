@@ -24,7 +24,7 @@ export default function ShareModal({ isOpen, onClose, user, isInline = false }: 
     const [copied, setCopied] = useState(false);
     const username = user.username || '';
     const profileUrl = typeof window !== 'undefined' ? `${window.location.origin}/${username}` : '';
-    const shareTitle = `Check out ${user.name || username}'s MiniLink!`;
+    const shareTitle = `Check out ${user.name || username}'s BioLync Pro mini!`;
 
     const handleCopy = () => {
         navigator.clipboard.writeText(profileUrl);
@@ -126,7 +126,7 @@ export default function ShareModal({ isOpen, onClose, user, isInline = false }: 
             <div className={`relative w-full ${isInline ? 'max-w-sm' : 'max-w-md'} bg-white rounded-[2rem] overflow-hidden shadow-2xl animate-in slide-in-from-bottom-8 zoom-in-95 duration-500 flex flex-col theme-${user.theme}`}>
                 {/* Header */}
                 <div className="px-6 py-5 flex items-center justify-between border-b border-gray-100">
-                    <h3 className="text-lg font-bold text-gray-900">Share MiniLink</h3>
+                    <h3 className="text-lg font-bold text-gray-900">Share BioLync Pro mini</h3>
                     <button
                         onClick={onClose}
                         className="p-2 rounded-full hover:bg-gray-100 transition-colors"
@@ -160,7 +160,7 @@ export default function ShareModal({ isOpen, onClose, user, isInline = false }: 
                             </div>
                             <h4 className="text-xl font-black mb-1">{user.name || `@${username}`}</h4>
                             <div className="flex items-center justify-center gap-1.5 font-bold text-violet-400">
-                                <span className="text-sm">MiniLink</span>
+                                <span className="text-sm">BioLync Pro mini</span>
                                 <span>/</span>
                                 <span className="text-sm">{username}</span>
                             </div>
@@ -197,9 +197,9 @@ export default function ShareModal({ isOpen, onClose, user, isInline = false }: 
 
                     {/* Footer Info */}
                     <div className="border-t border-gray-100 pt-6">
-                        <h4 className="font-black text-gray-900 mb-2 font-sans tracking-tight">Join {username} on MiniLink</h4>
+                        <h4 className="font-black text-gray-900 mb-2 font-sans tracking-tight">Join {username} on BioLync Pro mini</h4>
                         <p className="text-sm text-gray-500 font-medium mb-6 leading-relaxed">
-                            Get your own free MiniLink. The link in bio loved by creators everywhere.
+                            Get your own free BioLync Pro mini. The link in bio loved by creators everywhere.
                         </p>
                         <div className="flex gap-3">
                             <Link
