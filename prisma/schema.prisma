@@ -91,3 +91,17 @@ model PlatformSettings {
   showHomepageLivePreview Boolean @default(true)
   updatedAt             DateTime @updatedAt
 }
+
+model HomepageSection {
+  key            String   @id
+  enabled        Boolean  @default(true)
+  title          String   @default("")
+  subtitle       String   @default("")
+  body           String   @default("") @db.Text
+  primaryLabel   String   @default("")
+  primaryUrl     String   @default("")
+  secondaryLabel String   @default("")
+  secondaryUrl   String   @default("")
+  sortOrder      Int      @default(100)
+  updatedAt      DateTime @updatedAt
+}

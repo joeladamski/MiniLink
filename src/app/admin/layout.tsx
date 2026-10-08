@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic';
 const items = [
   { href: '/admin', label: 'Overview' },
   { href: '/admin/creators', label: 'Creators' },
+  { href: '/admin/sections', label: 'Homepage Sections' },
   { href: '/admin/settings', label: 'Settings' },
 ];
 

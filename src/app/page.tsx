@@ -22,6 +22,7 @@ import {
     ChevronDown
 } from 'lucide-react';
 import { SiteFooter } from '@/components/site-footer';
+import { DEFAULT_SECTIONS, type SectionContent, type SectionKey } from '@/lib/homepage-sections';
 import { Plus, Check, ExternalLink, Copy, MousePointer2, Linkedin, Youtube, MessageCircle, Send, Lock, Code, Terminal, CheckCircle2, Twitter, Instagram } from 'lucide-react';
 
 // Animated Laptop Demo Component
@@ -766,10 +767,12 @@ export default function HomePage() {
     const [openFAQ, setOpenFAQ] = useState<number | null>(null);
     const [mounted, setMounted] = useState(false);
     const [showHomepageLivePreview, setShowHomepageLivePreview] = useState(true);
+    const [homepageSections, setHomepageSections] = useState<SectionContent[]>(DEFAULT_SECTIONS);
+    const section = (key: SectionKey) => homepageSections.find(s => s.key === key) || DEFAULT_SECTIONS.find(s => s.key === key)!;
 
     useEffect(() => {
         setMounted(true);
-        fetch('/api/public/platform-features', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(data => { if (data && typeof data.showHomepageLivePreview === 'boolean') setShowHomepageLivePreview(data.showHomepageLivePreview); }).catch(() => {});
+        fetch('/api/public/homepage-sections', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(data => { if (data && Array.isArray(data.sections)) { setHomepageSections(data.sections); setShowHomepageLivePreview(data.sections.find((s: SectionContent) => s.key === 'live_preview')?.enabled !== false); } }).catch(() => {});
         // Check system preference
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             setIsDark(true);
@@ -901,7 +904,7 @@ export default function HomePage() {
             </nav>
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+            {section("hero").enabled && <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         {/* Hero Text */}
@@ -912,31 +915,30 @@ export default function HomePage() {
                             </div>
 
                             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                                <span className="text-gray-900 dark:text-white">One Link For</span>
+                                <span className="text-gray-900 dark:text-white">{section("hero").title}</span>
                                 <br />
                                 <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                                    Everything You Create
+                                    {section("hero").subtitle}
                                 </span>
                             </h1>
 
                             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed">
-                                Create your personalized link hub in seconds. Share your content,
-                                track your impact, and grow your audience — completely free.
+                                {section("hero").body}
                             </p>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                                 <Link
-                                    href={isSignedIn ? "/dashboard" : "/sign-up"}
+                                    href={isSignedIn ? "/dashboard" : section("hero").primaryUrl || "/sign-up"}
                                     className="group inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-violet-600 to-pink-600 rounded-2xl hover:shadow-xl hover:shadow-violet-500/30 hover:-translate-y-1 transition-all duration-300"
                                 >
-                                    {isSignedIn ? "Go to Dashboard" : "Create Your BioLync Pro mini"}
+                                    {isSignedIn ? "Go to Dashboard" : section("hero").primaryLabel}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                                 <Link
-                                    href="#features"
+                                    href={section("hero").secondaryUrl || "#features"}
                                     className="inline-flex items-center gap-2 px-8 py-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
                                 >
-                                    See Features
+                                    {section("hero").secondaryLabel}
                                     <ChevronRight className="w-5 h-5" />
                                 </Link>
                             </div>
@@ -965,19 +967,19 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>}
 
 
 
             {/* Live Demo Section */}
-            {showHomepageLivePreview && <section className="py-12 sm:py-24 relative overflow-hidden">
+            {showHomepageLivePreview && section("live_preview").enabled && <section className="py-12 sm:py-24 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
                         <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl mb-4">
-                            See It In Action
+                            {section("live_preview").title}
                         </h2>
                         <p className="text-lg text-gray-600 dark:text-gray-400">
-                            Watch how easily you can build and customize your page in real-time.
+                            {section("live_preview").subtitle}
                         </p>
                     </div>
 
@@ -1076,7 +1078,7 @@ export default function HomePage() {
             </section>}
 
             {/* Features Section */}
-            <section id="features" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            {section("features").enabled && <section id="features" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
                 {/* Background decoration */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 right-0 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl"></div>
@@ -1086,10 +1088,10 @@ export default function HomePage() {
                 <div className="max-w-7xl mx-auto relative">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-                            Everything You Need
+                            {section("features").title}
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-                            Build your perfect link hub with powerful features designed for creators
+                            {section("features").subtitle}
                         </p>
                     </div>
 
@@ -1180,7 +1182,7 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>}
 
             {/* FAQ Section */}
             <section className="py-24 px-4 sm:px-6 lg:px-8 relative" id="faq">
@@ -1242,7 +1244,7 @@ export default function HomePage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-24 px-4 sm:px-6 lg:px-8 relative">
+            {section("final_cta").enabled && <section className="py-24 px-4 sm:px-6 lg:px-8 relative">
                 <div className="max-w-5xl mx-auto">
                     <div className="relative rounded-[2.5rem] overflow-hidden">
                         {/* Animated Background */}
@@ -1283,28 +1285,28 @@ export default function HomePage() {
                         <div className="relative px-8 py-16 sm:px-16 sm:py-20 text-center">
 
                             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
-                                Ready to Share
+                                {section("final_cta").title}
                                 <br />
-                                <span className="text-white/90">Your World?</span>
+                                <span className="text-white/90">{section("final_cta").subtitle}</span>
                             </h2>
 
                             <p className="text-white/80 mb-10 text-lg sm:text-xl max-w-2xl mx-auto">
-                                Create your personalized BioLync Pro mini in under 60 seconds. No credit card required.
+                                {section("final_cta").body}
                             </p>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <Link
-                                    href={isSignedIn ? "/dashboard" : "/sign-up"}
+                                    href={isSignedIn ? "/dashboard" : section("final_cta").primaryUrl || "/sign-up"}
                                     className="group inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold text-violet-600 bg-white rounded-2xl hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-1 transition-all duration-300"
                                 >
-                                    {isSignedIn ? "Go to Dashboard" : "Get Started Free"}
+                                    {isSignedIn ? "Go to Dashboard" : section("final_cta").primaryLabel}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>}
 
             {/* Footer */}
             <SiteFooter />
