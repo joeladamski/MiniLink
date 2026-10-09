@@ -928,7 +928,7 @@ export default function HomePage() {
                                 <div aria-hidden="true" className="pointer-events-none absolute left-[5%] top-[18%] hidden h-14 w-14 -rotate-12 items-center justify-center rounded-2xl border border-pink-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(236,72,153,0.3)] sm:flex">✦</div>
                                 <div aria-hidden="true" className="pointer-events-none absolute right-[7%] bottom-[18%] hidden h-14 w-14 rotate-12 items-center justify-center rounded-2xl border border-violet-500/50 bg-gray-950/90 text-2xl shadow-[0_0_26px_rgba(139,92,246,0.3)] sm:flex">↗</div>
                                 <div className="relative w-full max-w-[520px]">
-                                    <div className="relative overflow-hidden rounded-[32px] border border-violet-300/50 bg-slate-950 p-2 shadow-[0_0_48px_rgba(139,92,246,0.35),0_24px_60px_rgba(0,0,0,0.35)] ring-1 ring-fuchsia-500/40 sm:p-3">
+                                    <div className="relative overflow-hidden rounded-[32px] border border-violet-300/50 bg-slate-950 px-2 pb-2 pt-[6px] shadow-[0_0_48px_rgba(139,92,246,0.35),0_24px_60px_rgba(0,0,0,0.35)] ring-1 ring-fuchsia-500/40 sm:px-3 sm:pb-3 sm:pt-2">
                                         {featuredUsername ? (
                                             <div className="relative h-[600px] overflow-hidden rounded-[24px] bg-slate-900 sm:h-[680px]">
                                                 <iframe

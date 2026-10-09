@@ -112,7 +112,7 @@ export default async function ProfilePage({ params, searchParams }: Props) {
             }} />
             <div className={`max-w-lg mx-auto px-4 pb-12 ${
                 searchParams?.featuredPreviewTheme === 'dark' || searchParams?.featuredPreviewTheme === 'light'
-                    ? 'pt-1'
+                    ? 'pt-2'
                     : user.avatarLayout === 'cover' ? 'pt-24 sm:pt-12' : 'pt-12'
             }`}>
                 {/* Profile Header (Dynamic layout chosen by user) */}
