@@ -198,7 +198,7 @@ export default async function ProfilePage({ params, searchParams }: Props) {
 
                         {/* Crown Badge floating in corner for Admin (outside card, tilted 45 degrees left on curved corner) */}
                         {isAdmin && (
-                            <div className="absolute -top-2.5 -left-2.5 z-30 pointer-events-none -rotate-[45deg] animate-bounce-roll">
+                            <div className={`absolute -left-2.5 z-30 pointer-events-none -rotate-[45deg] animate-bounce-roll ${searchParams?.featuredPreviewTheme ? 'top-[5px]' : '-top-2.5'}`}>
                                 <div className="absolute inset-0 bg-yellow-400/40 rounded-full blur-md animate-pulse" />
                                 <div className="relative w-9 h-9 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500 flex items-center justify-center shadow-lg border-2 border-yellow-200/50">
                                     <Crown className="w-4.5 h-4.5 text-yellow-900 drop-shadow-sm" strokeWidth={2.5} />
